@@ -27,7 +27,9 @@ import java.util.Random;
 public class BlockNorthPortal extends BlockBreakable {
     public static final PropertyEnum AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] {EnumFacing.Axis.X, EnumFacing.Axis.Z});
 
-    public BlockNorthPortal() {
+    public static BlockNorthPortal instance = new BlockNorthPortal();
+
+    private BlockNorthPortal() {
         super(Material.portal, false);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setLightLevel(.75f);
@@ -42,11 +44,11 @@ public class BlockNorthPortal extends BlockBreakable {
             int i = pos.getY();
             BlockPos blockpos1;
 
-            for (blockpos1 = pos; !World.doesBlockHaveSolidTopSurface(worldIn, blockpos1) && blockpos1.getY() > 0; blockpos1 = blockpos1.offsetDown()) {
+            for (blockpos1 = pos; !World.doesBlockHaveSolidTopSurface(worldIn, blockpos1) && blockpos1.getY() > 0; blockpos1 = blockpos1.down()) {
                 ;
             }
 
-            if (i > 0 && !worldIn.getBlockState(blockpos1.offsetUp()).getBlock().isNormalCube()) {
+            if (i > 0 && !worldIn.getBlockState(blockpos1.up()).getBlock().isNormalCube()) {
                 Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, 57, (double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 1.1D, (double) blockpos1.getZ() + 0.5D);
 
                 if (entity != null) {
@@ -143,10 +145,10 @@ public class BlockNorthPortal extends BlockBreakable {
             }
         }
 
-        boolean flag = worldIn.getBlockState(pos.offsetWest()).getBlock() == this && worldIn.getBlockState(pos.offsetWest(2)).getBlock() != this;
-        boolean flag1 = worldIn.getBlockState(pos.offsetEast()).getBlock() == this && worldIn.getBlockState(pos.offsetEast(2)).getBlock() != this;
-        boolean flag2 = worldIn.getBlockState(pos.offsetNorth()).getBlock() == this && worldIn.getBlockState(pos.offsetNorth(2)).getBlock() != this;
-        boolean flag3 = worldIn.getBlockState(pos.offsetSouth()).getBlock() == this && worldIn.getBlockState(pos.offsetSouth(2)).getBlock() != this;
+        boolean flag = worldIn.getBlockState(pos.west()).getBlock() == this && worldIn.getBlockState(pos.west(2)).getBlock() != this;
+        boolean flag1 = worldIn.getBlockState(pos.east()).getBlock() == this && worldIn.getBlockState(pos.east(2)).getBlock() != this;
+        boolean flag2 = worldIn.getBlockState(pos.north()).getBlock() == this && worldIn.getBlockState(pos.north(2)).getBlock() != this;
+        boolean flag3 = worldIn.getBlockState(pos.south()).getBlock() == this && worldIn.getBlockState(pos.south(2)).getBlock() != this;
         boolean flag4 = flag || flag1 || axis == EnumFacing.Axis.X;
         boolean flag5 = flag2 || flag3 || axis == EnumFacing.Axis.Z;
         return flag4 && side == EnumFacing.WEST ? true : (flag4 && side == EnumFacing.EAST ? true : (flag5 && side == EnumFacing.NORTH ? true : flag5 && side == EnumFacing.SOUTH));
@@ -203,7 +205,7 @@ public class BlockNorthPortal extends BlockBreakable {
             double d5 = ((double) rand.nextFloat() - 0.5D) * 0.1D;
             int j = rand.nextInt(2) * 2 - 1;
 
-            if (worldIn.getBlockState(pos.offsetWest()).getBlock() != this && worldIn.getBlockState(pos.offsetEast()).getBlock() != this) {
+            if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this) {
                 d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
             } else {
                 d2 = (double) pos.getZ() + 0.5D + 0.25D * (double) j;
@@ -250,7 +252,7 @@ public class BlockNorthPortal extends BlockBreakable {
                 this.field_150866_c = EnumFacing.SOUTH;
             }
 
-            for (BlockPos blockpos1 = p_i45694_2_; p_i45694_2_.getY() > blockpos1.getY() - 21 && p_i45694_2_.getY() > 0 && this.func_150857_a(worldIn.getBlockState(p_i45694_2_.offsetDown()).getBlock()); p_i45694_2_ = p_i45694_2_.offsetDown()) {
+            for (BlockPos blockpos1 = p_i45694_2_; p_i45694_2_.getY() > blockpos1.getY() - 21 && p_i45694_2_.getY() > 0 && this.func_150857_a(worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down()) {
                 ;
             }
 
@@ -277,7 +279,7 @@ public class BlockNorthPortal extends BlockBreakable {
             for (i = 0; i < 22; ++i) {
                 BlockPos blockpos1 = p_180120_1_.offset(p_180120_2_, i);
 
-                if (!this.func_150857_a(this.field_150867_a.getBlockState(blockpos1).getBlock()) || this.field_150867_a.getBlockState(blockpos1.offsetDown()).getBlock() != Blocks.packed_ice) {
+                if (!this.func_150857_a(this.field_150867_a.getBlockState(blockpos1).getBlock()) || this.field_150867_a.getBlockState(blockpos1.down()).getBlock() != Blocks.packed_ice) {
                     break;
                 }
             }
@@ -292,14 +294,14 @@ public class BlockNorthPortal extends BlockBreakable {
 
             for (this.field_150862_g = 0; this.field_150862_g < 21; ++this.field_150862_g) {
                 for (i = 0; i < this.field_150868_h; ++i) {
-                    BlockPos blockpos = this.field_150861_f.offset(this.field_150866_c, i).offsetUp(this.field_150862_g);
+                    BlockPos blockpos = this.field_150861_f.offset(this.field_150866_c, i).up(this.field_150862_g);
                     Block block = this.field_150867_a.getBlockState(blockpos).getBlock();
 
                     if (!this.func_150857_a(block)) {
                         break label56;
                     }
 
-                    if (block == NorthrendBlocks.portalNorthrend) {
+                    if (block == BlockNorthPortal.instance) {
                         ++this.field_150864_e;
                     }
 
@@ -320,7 +322,7 @@ public class BlockNorthPortal extends BlockBreakable {
             }
 
             for (i = 0; i < this.field_150868_h; ++i) {
-                if (this.field_150867_a.getBlockState(this.field_150861_f.offset(this.field_150866_c, i).offsetUp(this.field_150862_g)).getBlock() != Blocks.packed_ice) {
+                if (this.field_150867_a.getBlockState(this.field_150861_f.offset(this.field_150866_c, i).up(this.field_150862_g)).getBlock() != Blocks.packed_ice) {
                     this.field_150862_g = 0;
                     break;
                 }
@@ -338,7 +340,7 @@ public class BlockNorthPortal extends BlockBreakable {
 
         protected boolean func_150857_a(Block p_150857_1_) {
             Material material = (Material) Reflection.getFieldValue("blockMaterial", Block.class, p_150857_1_);
-            return material == Material.air || p_150857_1_ == NorthrendBlocks.snowLayerMod || p_150857_1_ == NorthrendBlocks.portalNorthrend;
+            return material == Material.air || p_150857_1_ == BlockNorthSnowModded.instance || p_150857_1_ == BlockNorthPortal.instance;
         }
 
         public boolean func_150860_b() {
@@ -350,7 +352,7 @@ public class BlockNorthPortal extends BlockBreakable {
                 BlockPos blockpos = this.field_150861_f.offset(this.field_150866_c, i);
 
                 for (int j = 0; j < this.field_150862_g; ++j) {
-                    this.field_150867_a.setBlockState(blockpos.offsetUp(j), NorthrendBlocks.portalNorthrend.getDefaultState().withProperty(BlockNorthPortal.AXIS, this.field_150865_b), 2);
+                    this.field_150867_a.setBlockState(blockpos.up(j), BlockNorthPortal.instance.getDefaultState().withProperty(BlockNorthPortal.AXIS, this.field_150865_b), 2);
                 }
             }
         }

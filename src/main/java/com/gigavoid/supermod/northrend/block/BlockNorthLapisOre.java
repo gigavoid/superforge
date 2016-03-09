@@ -16,7 +16,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthLapisOre extends Block {
-    public BlockNorthLapisOre() {
+    public static BlockNorthLapisOre instance = new BlockNorthLapisOre();
+
+    private BlockNorthLapisOre() {
         super(Material.rock);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setHardness(3.0f);
@@ -77,6 +79,6 @@ public class BlockNorthLapisOre extends Block {
     @Override
     public int damageDropped(IBlockState state)
     {
-        return EnumDyeColor.BLUE.getDyeColorDamage();
+        return EnumDyeColor.BLUE.getDyeDamage();
     }
 }

@@ -11,7 +11,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthDirt extends Block {
-    public BlockNorthDirt() {
+    public static BlockNorthDirt instance = new BlockNorthDirt();
+
+    private BlockNorthDirt() {
         super(Material.ground);
         this.setHardness(2.0f);
         this.setHarvestLevel("shovel", 0);

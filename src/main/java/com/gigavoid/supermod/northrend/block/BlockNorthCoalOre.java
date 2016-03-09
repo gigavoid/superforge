@@ -15,7 +15,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthCoalOre extends Block {
-    public BlockNorthCoalOre() {
+    public static BlockNorthCoalOre instance = new BlockNorthCoalOre();
+
+    private BlockNorthCoalOre() {
         super(Material.rock);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setHardness(3.0f);

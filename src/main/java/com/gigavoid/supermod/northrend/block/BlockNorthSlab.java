@@ -12,14 +12,14 @@ import net.minecraft.item.ItemStack;
 import java.util.Random;
 
 public class BlockNorthSlab extends BlockSlab {
+    public static BlockNorthSlab instance = new BlockNorthSlab();
 
-
-    protected BlockNorthSlab(int p_i45428_2_)
+    private BlockNorthSlab()
     {
         super(Material.wood);
         this.setHardness(.75f);
         this.setResistance(2.0f);
-        this.setStepSound(NorthrendBlocks.northPlanks.stepSound);
+        this.setStepSound(BlockNorthPlanks.instance.stepSound);
         this.setLightOpacity(255);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
     }
@@ -31,22 +31,22 @@ public class BlockNorthSlab extends BlockSlab {
     }
 
     @Override
-    public Object func_176553_a(ItemStack p_176553_1_) {
+    public Object getVariant(ItemStack p_176553_1_) {
         return null;
     }
 
     @Override
-    public IProperty func_176551_l() {
+    public IProperty getVariantProperty() {
         return null;
+    }
+
+    @Override
+    public String getUnlocalizedName(int meta) {
+        return "north_slab";
     }
 
     @Override
     public boolean isDouble() {
         return false;
-    }
-
-    @Override
-    public String getFullSlabName(int p_150002_1_) {
-        return "north slab";
     }
 }

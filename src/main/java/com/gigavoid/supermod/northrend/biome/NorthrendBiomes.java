@@ -17,17 +17,17 @@ public class NorthrendBiomes {
     public static BiomeGenNorthSpikes northSpikes;
 
     public static void registerBiomes(Register register){
-        northForest = new BiomeGenNorthPineForest(register.getNextBiomeID(), 10);
-        northFirForest = new BiomeGenNorthFirForest(register.getNextBiomeID(), 10);
-        northMountains = new BiomeGenNorthMountains(register.getNextBiomeID(), 30);
-        northPlains = new BiomeGenNorthPlains(register.getNextBiomeID(), 60);
-        northGlacier = new BiomeGenNorthGlacier(register.getNextBiomeID(), 60);
-        northHighlands = new BiomeGenNorthHighlands(register.getNextBiomeID(), 30);
-        northHugeMountains = new BiomeGenNorthHugeMountains(register.getNextBiomeID(), 10);
-        northHills = new BiomeGenNorthHills(register.getNextBiomeID(), 60);
-        northBirchForest = new BiomeGenNorthBirchForest(register.getNextBiomeID(), 10);
-        northBlight = new BiomeGenNorthBlight(register.getNextBiomeID(), 10);
-        northSpikes = new BiomeGenNorthSpikes(register.getNextBiomeID(), 5);
+        northForest = new BiomeGenNorthPineForest(register.getNextBiomeID(), 10); //10
+        northFirForest = new BiomeGenNorthFirForest(register.getNextBiomeID(), 10); //10
+        northMountains = new BiomeGenNorthMountains(register.getNextBiomeID(), 30); //30
+        northPlains = new BiomeGenNorthPlains(register.getNextBiomeID(), 60); //60
+        northGlacier = new BiomeGenNorthGlacier(register.getNextBiomeID(), 60); //60
+        northHighlands = new BiomeGenNorthHighlands(register.getNextBiomeID(), 60); //60
+        northHugeMountains = new BiomeGenNorthHugeMountains(register.getNextBiomeID(), 10); //10
+        northHills = new BiomeGenNorthHills(register.getNextBiomeID(), 60); //60
+        northBirchForest = new BiomeGenNorthBirchForest(register.getNextBiomeID(), 10); //10
+        northBlight = new BiomeGenNorthBlight(register.getNextBiomeID(), 0);
+        northSpikes = new BiomeGenNorthSpikes(register.getNextBiomeID(), 5); //5
 
         BiomeManager.addBiome(BiomeManager.BiomeType.ICY, new BiomeManager.BiomeEntry(northForest, 0));
         BiomeManager.addBiome(BiomeManager.BiomeType.ICY, new BiomeManager.BiomeEntry(northFirForest, 0));

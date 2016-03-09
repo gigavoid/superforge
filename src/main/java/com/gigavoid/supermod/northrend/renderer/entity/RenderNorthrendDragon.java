@@ -78,12 +78,12 @@ public class RenderNorthrendDragon extends RenderLiving
         if (p_77036_1_.hurtTime > 0)
         {
             GlStateManager.depthFunc(514);
-            GlStateManager.func_179090_x();
+            GlStateManager.disableTexture2D();
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(770, 771);
             GlStateManager.color(1.0F, 0.0F, 0.0F, 0.5F);
             this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
-            GlStateManager.func_179098_w();
+            GlStateManager.enableTexture2D();
             GlStateManager.disableBlend();
             GlStateManager.depthFunc(515);
         }

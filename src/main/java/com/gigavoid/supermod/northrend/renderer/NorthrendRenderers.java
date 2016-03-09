@@ -13,6 +13,6 @@ public class NorthrendRenderers {
     public static void registerRenderers(){
         RenderingRegistry.registerEntityRenderingHandler(EntityNorthrendDragon.class, new RenderNorthrendDragon(Minecraft.getMinecraft().getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityIzrr.class, new RenderIzrr(Minecraft.getMinecraft().getRenderManager()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityFrostattack.class, new RenderFrostattack(Minecraft.getMinecraft().getRenderManager(), .7F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityFrostattack.class, new RenderFrostattack(Minecraft.getMinecraft().getRenderManager()));
     }
 }

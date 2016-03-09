@@ -1,5 +1,6 @@
 package com.gigavoid.supermod.northrend.worldgen.custom;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthStone;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ public class NorthrendWorldGenMinable extends WorldGenMinable
 
     public NorthrendWorldGenMinable(IBlockState p_i45630_1_, int p_i45630_2_)
     {
-        this(p_i45630_1_, p_i45630_2_, BlockHelper.forBlock(NorthrendBlocks.northStone));
+        this(p_i45630_1_, p_i45630_2_, BlockHelper.forBlock(BlockNorthStone.instance));
     }
 
     public NorthrendWorldGenMinable(IBlockState p_i45630_1_, int p_i45630_2_, Block block)

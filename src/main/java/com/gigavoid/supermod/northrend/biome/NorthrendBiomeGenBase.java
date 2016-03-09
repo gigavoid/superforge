@@ -1,20 +1,29 @@
 package com.gigavoid.supermod.northrend.biome;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthBlight;
+import com.gigavoid.supermod.northrend.block.BlockNorthGlacialIce;
+import com.gigavoid.supermod.northrend.block.BlockNorthStone;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.gigavoid.supermod.northrend.entity.EntityIzrr;
+import com.google.common.collect.Lists;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class NorthrendBiomeGenBase extends BiomeGenBase {
     int weight = 0;
+    private ArrayList<? extends Block> specialBlocks = Lists.newArrayList(BlockNorthBlight.instance);
 
     public NorthrendBiomeGenBase(int p_i1971_1_, int weight)
     {
@@ -54,6 +63,7 @@ public class NorthrendBiomeGenBase extends BiomeGenBase {
         int l = (int)(p_180628_6_ / 3.0D + 3.0D + p_180628_2_.nextDouble() * 0.25D);
         int i1 = p_180628_4_ & 15;
         int j1 = p_180628_5_ & 15;
+        int specialBlockHeightLimit = p_180628_2_.nextInt(4) + 62;
 
         for (int k1 = 255; k1 >= 0; --k1)
         {
@@ -69,14 +79,14 @@ public class NorthrendBiomeGenBase extends BiomeGenBase {
                 {
                     k = -1;
                 }
-                else if (iblockstate2.getBlock() == NorthrendBlocks.northStone)
+                else if (iblockstate2.getBlock() == BlockNorthStone.instance)
                 {
                     if (k == -1)
                     {
                         if (l <= 0)
                         {
                             iblockstate = null;
-                            iblockstate1 = NorthrendBlocks.northStone.getDefaultState();
+                            iblockstate1 = BlockNorthStone.instance.getDefaultState();
                         }
                         else if (k1 >= 59 && k1 <= 64)
                         {
@@ -98,7 +108,7 @@ public class NorthrendBiomeGenBase extends BiomeGenBase {
                         else if (k1 < 56 - l)
                         {
                             iblockstate = null;
-                            iblockstate1 = NorthrendBlocks.northStone.getDefaultState();
+                            iblockstate1 = BlockNorthStone.instance.getDefaultState();
                         }
                         else
                         {
@@ -111,11 +121,13 @@ public class NorthrendBiomeGenBase extends BiomeGenBase {
                     }
                 }
             }
-            if (k1 < 62 && p_180628_3_.getBlockState(j1, k1, i1).getBlock() == Blocks.snow){
-                p_180628_3_.setBlockState(j1, k1, i1, NorthrendBlocks.glacialIce.getDefaultState());
+            if (k1 < 62 && p_180628_3_.getBlockState(j1, k1, i1).getBlock() == Blocks.snow) {
+                p_180628_3_.setBlockState(j1, k1, i1, BlockNorthGlacialIce.instance.getDefaultState());
+            } else if (k1 == 62 && p_180628_3_.getBlockState(j1, k1, i1).getBlock() == Blocks.snow && .5f < p_180628_2_.nextFloat()) {
+                p_180628_3_.setBlockState(j1, k1, i1, BlockNorthGlacialIce.instance.getDefaultState());
             }
-            else if (k1 == 62 && p_180628_3_.getBlockState(j1, k1, i1).getBlock() == Blocks.snow && .5f < p_180628_2_.nextFloat()) {
-                p_180628_3_.setBlockState(j1, k1, i1, NorthrendBlocks.glacialIce.getDefaultState());
+            if (k1 > specialBlockHeightLimit && specialBlocks.contains(p_180628_3_.getBlockState(j1, k1, i1).getBlock())) {
+                p_180628_3_.setBlockState(j1, k1, i1, Blocks.snow.getDefaultState());
             }
         }
     }

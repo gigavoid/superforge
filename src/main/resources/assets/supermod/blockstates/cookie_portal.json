@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "axis=z": {"model": "supermod:cookie_portal_ew"},
-        "axis=x": {"model": "supermod:cookie_portal_ns"}
-    }
-}

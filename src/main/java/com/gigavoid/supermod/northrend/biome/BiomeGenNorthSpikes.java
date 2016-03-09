@@ -22,7 +22,8 @@ public class BiomeGenNorthSpikes extends NorthrendBiomeGenBase {
         fillerBlock = Block.getBlockFromName("snow").getDefaultState();
     }
 
-    public void func_180624_a(World worldIn, Random p_180624_2_, BlockPos p_180624_3_)
+    @Override
+    public void decorate(World worldIn, Random p_180624_2_, BlockPos p_180624_3_)
     {
         int i;
         int j;
@@ -42,6 +43,6 @@ public class BiomeGenNorthSpikes extends NorthrendBiomeGenBase {
             this.icePathGen.generate(worldIn, p_180624_2_, worldIn.getHorizon(p_180624_3_.add(j, 0, k)));
         }
 
-        super.func_180624_a(worldIn, p_180624_2_, p_180624_3_);
+        super.decorate(worldIn, p_180624_2_, p_180624_3_);
     }
 }

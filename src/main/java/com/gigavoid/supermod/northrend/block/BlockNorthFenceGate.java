@@ -10,7 +10,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 public class BlockNorthFenceGate extends BlockFenceGate {
-    public BlockNorthFenceGate(){
+    public static BlockNorthFenceGate instance = new BlockNorthFenceGate();
+
+    private BlockNorthFenceGate(){
         super();
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
     }
@@ -18,6 +20,6 @@ public class BlockNorthFenceGate extends BlockFenceGate {
     @Override
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, field_176466_a, field_176465_b, field_176467_M});
+        return new BlockState(this, FACING, OPEN, POWERED, IN_WALL);
     }
 }

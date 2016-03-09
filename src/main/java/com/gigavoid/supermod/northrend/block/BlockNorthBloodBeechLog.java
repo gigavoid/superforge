@@ -9,7 +9,9 @@ import net.minecraft.item.Item;
 import java.util.Random;
 
 public class BlockNorthBloodBeechLog extends BlockLog {
-    public BlockNorthBloodBeechLog(){
+    public static BlockNorthBloodBeechLog instance = new BlockNorthBloodBeechLog();
+
+    private BlockNorthBloodBeechLog(){
         super();
         this.setHardness(1.0f);
         this.setHarvestLevel("axe", 0);
@@ -25,7 +27,7 @@ public class BlockNorthBloodBeechLog extends BlockLog {
     @Override
     public int getMetaFromState(IBlockState state)
     {
-        switch ((BlockLog.EnumAxis)state.getValue(AXIS_PROP))
+        switch ((BlockLog.EnumAxis)state.getValue(LOG_AXIS))
         {
             case X:
                 return 1;
@@ -41,6 +43,6 @@ public class BlockNorthBloodBeechLog extends BlockLog {
     @Override
     protected BlockState createBlockState()
     {
-        return new BlockState(this, AXIS_PROP);
+        return new BlockState(this, LOG_AXIS);
     }
 }

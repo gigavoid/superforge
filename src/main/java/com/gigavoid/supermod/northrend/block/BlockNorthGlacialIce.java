@@ -10,7 +10,9 @@ import net.minecraft.item.Item;
 import java.util.Random;
 
 public class BlockNorthGlacialIce extends Block {
-    public BlockNorthGlacialIce(){
+    public static BlockNorthGlacialIce instance = new BlockNorthGlacialIce();
+
+    private BlockNorthGlacialIce(){
         super(Material.rock);
         this.setHardness(2.0f);
         this.setHarvestLevel("pickaxe", 0);

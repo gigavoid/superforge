@@ -9,25 +9,28 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockNorthSnowModded extends BlockSnow {
-    public BlockNorthSnowModded(){
+    public static BlockNorthSnowModded instance = new BlockNorthSnowModded();
+
+    private BlockNorthSnowModded(){
         super();
         setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
     }
 
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        IBlockState iblockstate = worldIn.getBlockState(pos.offsetDown());
+        IBlockState iblockstate = worldIn.getBlockState(pos.down());
         Block block = iblockstate.getBlock();
-        return block != Blocks.ice && block != Blocks.packed_ice && block != NorthrendBlocks.glacialIce && block != NorthrendBlocks.dragonBone && block != NorthrendBlocks.blight
-                && (block.isLeaves(worldIn, pos.offsetDown())
-                || (block == this && (Integer) iblockstate.getValue(LAYERS_PROP) == 7
+        // && block != BlockNorthGlacialIce.instance && block != BlockNorthDragonBone.instance
+        return block != Blocks.ice && block != Blocks.packed_ice && block != BlockNorthBlight.instance
+                && (block.isLeaves(worldIn, pos.down())
+                || (block == this && (Integer) iblockstate.getValue(LAYERS) == 7
                 || block.isOpaqueCube() && block.getMaterial().blocksMovement()));
     }
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
-        if (worldIn.provider.getDimensionId() < 0 || !NorthrendBlocks.portalNorthrend.func_176548_d(worldIn, pos)) {
+        if (worldIn.provider.getDimensionId() < 0 || !BlockNorthPortal.instance.func_176548_d(worldIn, pos)) {
             if(!canPlaceBlockAt(worldIn, pos)){
                 worldIn.setBlockToAir(pos);
             }

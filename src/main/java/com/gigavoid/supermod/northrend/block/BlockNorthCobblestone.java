@@ -14,7 +14,9 @@ import java.util.Random;
  * Created by Rasmus on 2014-11-06.
  */
 public class BlockNorthCobblestone extends Block {
-    public BlockNorthCobblestone(){
+    public static BlockNorthCobblestone instance = new BlockNorthCobblestone();
+
+    private BlockNorthCobblestone(){
         super(Material.rock);
         this.setHardness(2.0f);
         this.setHarvestLevel("pickaxe", 0);

@@ -11,7 +11,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthPlanks extends Block {
-    public BlockNorthPlanks(){
+    public static BlockNorthPlanks instance = new BlockNorthPlanks();
+
+    private BlockNorthPlanks(){
         super(Material.wood);
         this.setHardness(1.0f);
         this.setHarvestLevel("axe", 0);

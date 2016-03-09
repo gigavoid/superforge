@@ -15,7 +15,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthFrostGemOre extends Block {
-    public BlockNorthFrostGemOre() {
+    public static BlockNorthFrostGemOre instance = new BlockNorthFrostGemOre();
+
+    private BlockNorthFrostGemOre() {
         super(Material.rock);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setHardness(7.0f);

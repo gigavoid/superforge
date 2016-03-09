@@ -70,6 +70,11 @@ public class EntityNorthrendDragon extends EntityLiving implements IEntityMultiP
         this.ignoreFrustumCheck = true;
     }
 
+    @Override
+    public World getWorld() {
+        return null;
+    }
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
@@ -120,7 +125,7 @@ public class EntityNorthrendDragon extends EntityLiving implements IEntityMultiP
             f = MathHelper.cos(this.animTime * (float)Math.PI * 2.0F);
             f1 = MathHelper.cos(this.prevAnimTime * (float)Math.PI * 2.0F);
 
-            if (f1 <= -0.3F && f >= -0.3F && !this.isSlient())
+            if (f1 <= -0.3F && f >= -0.3F && !this.isSilent())
             {
                 this.worldObj.playSound(this.posX, this.posY, this.posZ, "mob.enderdragon.wings", 5.0F, 0.8F + this.rand.nextFloat() * 0.3F, false);
             }
@@ -565,7 +570,7 @@ public class EntityNorthrendDragon extends EntityLiving implements IEntityMultiP
 
             if (this.deathTicks == 1)
             {
-                this.worldObj.func_175669_a(1018, new BlockPos(this), 0);
+                this.worldObj.playBroadcastSound(1018, new BlockPos(this), 0);
             }
         }
 

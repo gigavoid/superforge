@@ -16,7 +16,7 @@ public class RopewayMapGenCaves extends MapGenCaves
         IBlockState top = biome.topBlock;
         IBlockState filler = biome.fillerBlock;
 
-        if (this.func_175793_a(state, up) || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock() || state.getBlock() == NorthrendBlocks.northStone || state.getBlock() == NorthrendBlocks.glacialIce)
+        if (this.func_175793_a(state, up) || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock() || state.getBlock() == Blocks.stone)
         {
             if (y < 10)
             {
@@ -28,7 +28,7 @@ public class RopewayMapGenCaves extends MapGenCaves
 
                 if (up.getBlock() == Blocks.sand)
                 {
-                    data.setBlockState(x, y + 1, z, up.getValue(BlockSand.VARIANT_PROP) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState());
+                    data.setBlockState(x, y + 1, z, up.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState());
                 }
 
                 if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock())

@@ -8,11 +8,14 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumFacing;
 
 import java.util.Random;
 
 public class BlockNorthLog extends BlockLog {
-    public BlockNorthLog(){
+    public static BlockNorthLog instance = new BlockNorthLog();
+
+    private BlockNorthLog(){
         super();
         this.setHardness(1.0f);
         this.setHarvestLevel("axe", 0);
@@ -28,7 +31,7 @@ public class BlockNorthLog extends BlockLog {
     @Override
     public int getMetaFromState(IBlockState state)
     {
-        switch ((EnumAxis)state.getValue(AXIS_PROP))
+        switch ((EnumAxis)state.getValue(LOG_AXIS))
         {
             case X:
                 return 1;
@@ -44,6 +47,6 @@ public class BlockNorthLog extends BlockLog {
     @Override
     protected BlockState createBlockState()
     {
-        return new BlockState(this, AXIS_PROP);
+        return new BlockState(this, LOG_AXIS);
     }
 }

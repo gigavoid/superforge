@@ -1,5 +1,8 @@
 package com.gigavoid.supermod.northrend.worldgen.structures;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthDirt;
+import com.gigavoid.supermod.northrend.block.BlockNorthFence;
+import com.gigavoid.supermod.northrend.block.BlockNorthPlanks;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.google.common.collect.Lists;
 import java.util.Iterator;
@@ -30,11 +33,11 @@ import static net.minecraftforge.common.ChestGenHooks.*;
 
 public class NorthrendStructureMineshaftPieces
 {
-    public static Block wood = NorthrendBlocks.northPlanks;
-    public static Block fence = NorthrendBlocks.northFence;
-    public static Block dirt = NorthrendBlocks.northDirt;
+    public static Block wood = BlockNorthPlanks.instance;
+    public static Block fence = BlockNorthFence.instance;
+    public static Block dirt = BlockNorthDirt.instance;
 
-    private static final List field_175893_a = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 5), new WeightedRandomChestContent(Items.redstone, 0, 4, 9, 5), new WeightedRandomChestContent(Items.dye, EnumDyeColor.BLUE.getDyeColorDamage(), 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(Items.coal, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.iron_pickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(Items.melon_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.pumpkin_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3), new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1)});
+    private static final List field_175893_a = Lists.newArrayList(new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 5), new WeightedRandomChestContent(Items.redstone, 0, 4, 9, 5), new WeightedRandomChestContent(Items.dye, EnumDyeColor.BLUE.getDyeDamage(), 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(Items.coal, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.iron_pickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(Items.melon_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.pumpkin_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3), new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1));
     private static final String __OBFID = "CL_00000444";
 
     public static void registerStructurePieces()

@@ -1,6 +1,6 @@
 package com.gigavoid.supermod.northrend.worldgen.structures;
 
-import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
+import com.gigavoid.supermod.northrend.block.*;
 import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
@@ -22,11 +22,11 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 
 public class NorthrendStructureFortressPieces
 {
-    public static Block mainBlock = NorthrendBlocks.northCobble;
-    public static Block fenceBlock = NorthrendBlocks.northFence;
-    public static Block stairsBlock = NorthrendBlocks.northCobbleStairs;
-    public static Block dirtBlock = NorthrendBlocks.northDirt;
-    public static Block plantBlock = NorthrendBlocks.northGlaciemPlant;
+    public static Block mainBlock = BlockNorthCobblestone.instance;
+    public static Block fenceBlock = BlockNorthFence.instance;
+    public static Block stairsBlock = BlockNorthStoneStairs.instance;
+    public static Block dirtBlock = BlockNorthDirt.instance;
+    public static Block plantBlock = BlockNorthGlaciemPlant.instance;
     
     private static final NorthrendStructureFortressPieces.PieceWeight[] primaryComponents = new NorthrendStructureFortressPieces.PieceWeight[] {new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Straight.class, 30, 0, true), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Crossing3.class, 10, 4), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Crossing.class, 10, 4), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Stairs.class, 10, 3), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Throne.class, 5, 2), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Entrance.class, 5, 1)};
     private static final NorthrendStructureFortressPieces.PieceWeight[] secondaryComponents = new NorthrendStructureFortressPieces.PieceWeight[] {new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Corridor5.class, 25, 0, true), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Crossing2.class, 15, 5), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Corridor2.class, 5, 10), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Corridor.class, 5, 10), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Corridor3.class, 10, 3, true), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.Corridor4.class, 7, 2), new NorthrendStructureFortressPieces.PieceWeight(NorthrendStructureFortressPieces.NetherStalkRoom.class, 5, 2)};
@@ -915,7 +915,7 @@ public class NorthrendStructureFortressPieces
 
             if (p_74875_3_.func_175898_b(blockpos))
             {
-                worldIn.func_175637_a(Blocks.obsidian, blockpos, p_74875_2_);
+                worldIn.forceBlockUpdateTick(Blocks.obsidian, blockpos, p_74875_2_);
             }
 
             return true;

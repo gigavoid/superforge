@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockNorthBloodBeechLeaves extends BlockLeaves {
-    public BlockNorthBloodBeechLeaves(){
+    public static BlockNorthBloodBeechLeaves instance = new BlockNorthBloodBeechLeaves();
+
+    private BlockNorthBloodBeechLeaves(){
         super();
         this.setHardness(1.0f);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
@@ -36,7 +38,7 @@ public class BlockNorthBloodBeechLeaves extends BlockLeaves {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return Item.getItemFromBlock(NorthrendBlocks.northPineSapling); // Fixa något coolt
+        return Item.getItemFromBlock(BlockNorthSapling.instance_birch); // Fixa något coolt
     }
 
     @Override
@@ -82,7 +84,7 @@ public class BlockNorthBloodBeechLeaves extends BlockLeaves {
     }
 
     @Override
-    public BlockPlanks.EnumType func_176233_b(int p_176233_1_) {
+    public BlockPlanks.EnumType getWoodType(int p_176233_1_) {
         return BlockPlanks.EnumType.SPRUCE;
     }
 
@@ -100,7 +102,7 @@ public class BlockNorthBloodBeechLeaves extends BlockLeaves {
     @Override
     protected BlockState createBlockState()
     {
-        return new BlockState(this, BlockLeaves.field_176236_b);
+        return new BlockState(this, CHECK_DECAY, DECAYABLE);
     }
 
     @Override

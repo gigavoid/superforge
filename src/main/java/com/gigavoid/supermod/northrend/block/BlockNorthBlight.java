@@ -8,12 +8,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class BlockNorthBlight extends Block {
-    public BlockNorthBlight() {
+    public static BlockNorthBlight instance = new BlockNorthBlight();
+
+    private BlockNorthBlight() {
         super(Material.ground);
         this.setHardness(2.0f);
         this.setHarvestLevel("pickaxe", 0);
@@ -25,5 +28,15 @@ public class BlockNorthBlight extends Block {
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(this);
+    }
+
+    @Override
+    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
+        super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+        if (neighborBlock == Blocks.snow_layer){
+            if (worldIn.getBlockState(pos.offset(EnumFacing.UP)).getBlock() == neighborBlock){
+                worldIn.setBlockToAir(pos.offset(EnumFacing.UP));
+            }
+        }
     }
 }

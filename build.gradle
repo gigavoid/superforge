@@ -11,19 +11,20 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
     }
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "1.8-1.0"
 group= "com.gigavoid.supermod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SuperMod"
 
 minecraft {
-    version = "1.8-11.14.2.1444"
+    version = "1.8-11.14.3.1543"
     runDir = "eclipse"
+    mappings = "snapshot_20141130"
 }
 
 dependencies {

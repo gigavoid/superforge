@@ -1,5 +1,6 @@
 package com.gigavoid.supermod.northrend.biome;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthDirt;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.gigavoid.supermod.northrend.worldgen.tree.NorthrendWorldGenTree;
 import net.minecraft.block.Block;
@@ -15,7 +16,7 @@ public class BiomeGenNorthPineForest extends NorthrendBiomeGenBase {
         setBiomeName("Northrend Pine Forest");
         setHeight(new Height(0.2f, 0.15f));
         topBlock = Block.getBlockFromName("snow").getDefaultState();
-        fillerBlock = NorthrendBlocks.northDirt.getDefaultState();
+        fillerBlock = BlockNorthDirt.instance.getDefaultState();
         theBiomeDecorator.treesPerChunk = 14;
     }
 

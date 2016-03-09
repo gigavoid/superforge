@@ -1,5 +1,6 @@
 package com.gigavoid.supermod.northrend.recipe;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthMithrilOre;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.gigavoid.supermod.northrend.item.NorthrendItems;
 import net.minecraft.init.Blocks;
@@ -46,7 +47,7 @@ public class NorthrendRecipies {
     }
 
     private static void mithrilIngot(){
-        GameRegistry.addSmelting(NorthrendBlocks.mithrilOre, new ItemStack(NorthrendItems.mithrilIngot), 1);
+        GameRegistry.addSmelting(BlockNorthMithrilOre.instance, new ItemStack(NorthrendItems.mithrilIngot), 1);
     }
 
     private static void boiledGlaciemStem(){

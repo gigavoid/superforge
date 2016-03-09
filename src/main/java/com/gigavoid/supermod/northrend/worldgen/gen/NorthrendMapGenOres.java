@@ -2,10 +2,9 @@ package com.gigavoid.supermod.northrend.worldgen.gen;
 
 import java.util.Random;
 
-import com.gigavoid.supermod.bonus.block.BonusBlocks;
 import com.gigavoid.supermod.northrend.ModuleNorthrend;
 import com.gigavoid.supermod.northrend.biome.NorthrendBiomes;
-import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
+import com.gigavoid.supermod.northrend.block.*;
 import com.gigavoid.supermod.northrend.worldgen.custom.NorthrendWorldGenMinable;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -26,7 +25,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
         int z = chunkZ + random.nextInt(16);
         BlockPos pos = new BlockPos(x, y, z);
         if (world.getBiomeGenForCoords(pos) == NorthrendBiomes.northHugeMountains) {
-            (new NorthrendWorldGenMinable(NorthrendBlocks.frostGemOre.getDefaultState(), 1, NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthFrostGemOre.instance.getDefaultState(), 1, BlockNorthStone.instance)).generate(world, random, pos);
         }
         int rn = 95 + random.nextInt(15);
         for(int k = 0; k < rn; k++) {
@@ -34,7 +33,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = random.nextInt(255);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.coalOre.getDefaultState(), 4 + random.nextInt(13), NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthCoalOre.instance.getDefaultState(), 4 + random.nextInt(13), BlockNorthStone.instance)).generate(world, random, pos);
         }
         rn = 70 + random.nextInt(20);
         for(int k = 0; k < rn; k++) {
@@ -42,7 +41,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = random.nextInt(128);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.ironOre.getDefaultState(), 3 + random.nextInt(7), NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthIronOre.instance.getDefaultState(), 3 + random.nextInt(7), BlockNorthStone.instance)).generate(world, random, pos);
         }
         rn = 17 + random.nextInt(6);
         for(int k = 0; k < rn; k++) {
@@ -50,7 +49,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = random.nextInt(45);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.goldOre.getDefaultState(), 2 + random.nextInt(7), NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthGoldOre.instance.getDefaultState(), 2 + random.nextInt(7), BlockNorthStone.instance)).generate(world, random, pos);
         }
         rn = 8 + random.nextInt(4);
         for(int k = 0; k < rn; k++) {
@@ -58,7 +57,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = random.nextInt(35);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.mithrilOre.getDefaultState(), 2 + random.nextInt(2), NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthMithrilOre.instance.getDefaultState(), 2 + random.nextInt(2), BlockNorthStone.instance)).generate(world, random, pos);
         }
         rn = 4 + random.nextInt(4);
         for(int k = 0; k < rn; k++) {
@@ -66,7 +65,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = random.nextInt(16);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.diamondOre.getDefaultState(), 2 + random.nextInt(3), NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthDiamondOre.instance.getDefaultState(), 2 + random.nextInt(3), BlockNorthStone.instance)).generate(world, random, pos);
         }
         rn = 2 + random.nextInt(2);
         for(int k = 0; k < rn; k++) {
@@ -74,7 +73,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = random.nextInt(40);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.emeraldOre.getDefaultState(), 1 + random.nextInt(3), NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthEmeraldOre.instance.getDefaultState(), 1 + random.nextInt(3), BlockNorthStone.instance)).generate(world, random, pos);
         }
         rn = 12 + random.nextInt(6);
         for(int k = 0; k < rn; k++) {
@@ -82,14 +81,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = random.nextInt(25);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.lapisOre.getDefaultState(), 2 + random.nextInt(5), NorthrendBlocks.northStone)).generate(world, random, pos);
-        }
-        if (random.nextFloat() > .999f){
-            x = chunkX + random.nextInt(16);
-            y = random.nextInt(40);
-            z = chunkZ + random.nextInt(16);
-            pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(BonusBlocks.bonus.getDefaultState(), 1, NorthrendBlocks.northStone)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthLapisOre.instance.getDefaultState(), 2 + random.nextInt(5), BlockNorthStone.instance)).generate(world, random, pos);
         }
         rn = random.nextInt(3);
         for(int k = 0; k < rn; k++) {
@@ -97,7 +89,7 @@ public class NorthrendMapGenOres implements IWorldGenerator
             y = 45 + random.nextInt(10);
             z = chunkZ + random.nextInt(16);
             pos = new BlockPos(x, y, z);
-            (new NorthrendWorldGenMinable(NorthrendBlocks.dragonBone.getDefaultState(), 6 + random.nextInt(5), NorthrendBlocks.glacialIce)).generate(world, random, pos);
+            (new NorthrendWorldGenMinable(BlockNorthDragonBone.instance.getDefaultState(), 6 + random.nextInt(5), BlockNorthGlacialIce.instance)).generate(world, random, pos);
         }
     }
 }

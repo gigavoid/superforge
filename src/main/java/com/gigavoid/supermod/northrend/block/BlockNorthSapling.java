@@ -24,7 +24,11 @@ public class BlockNorthSapling extends BlockBush implements IGrowable {
 
     private final EnumType type;
 
-    public BlockNorthSapling(BlockNorthSapling.EnumType type) {
+    public static BlockNorthSapling instance_birch = new BlockNorthSapling(EnumType.BIRCH);
+    public static BlockNorthSapling instance_pine = new BlockNorthSapling(EnumType.PINE);
+    public static BlockNorthSapling instance_fir = new BlockNorthSapling(EnumType.FIR);
+
+    private BlockNorthSapling(BlockNorthSapling.EnumType type) {
         this.type = type;
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE_PROP_N, type).withProperty(STAGE_PROP, 0));
         float f = 0.4F;
@@ -40,7 +44,7 @@ public class BlockNorthSapling extends BlockBush implements IGrowable {
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return worldIn.getBlockState(pos.offsetDown()).getBlock() == NorthrendBlocks.northDirt;
+        return worldIn.getBlockState(pos.down()).getBlock() == BlockNorthDirt.instance;
     }
 
 
@@ -49,7 +53,7 @@ public class BlockNorthSapling extends BlockBush implements IGrowable {
     {
         if (!worldIn.isRemote)
         {
-            if (worldIn.getLightFromNeighbors(pos.offsetUp()) >= 9 && rand.nextInt(7) == 0 && canPlaceBlockAt(worldIn, pos.offsetDown()))
+            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0 && canPlaceBlockAt(worldIn, pos.down()))
             {
                 this.func_176478_d(worldIn, pos, state, rand);
             }
@@ -89,7 +93,7 @@ public class BlockNorthSapling extends BlockBush implements IGrowable {
 
         worldIn.setBlockState(pos, iblockstate1, 4);
 
-        if (!(object).generate(worldIn, random, pos.offsetUp()))
+        if (!(object).generate(worldIn, random, pos.up()))
         {
             worldIn.setBlockState(pos, blockState, 4);
         }
@@ -101,11 +105,17 @@ public class BlockNorthSapling extends BlockBush implements IGrowable {
         return ((BlockNorthSapling.EnumType)state.getValue(TYPE_PROP_N)).func_176839_a();
     }
 
+    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+    {
+        return true;
+    }
+
+    /*
     @Override
     public boolean isStillGrowing(World worldIn, BlockPos p_176473_2_, IBlockState p_176473_3_, boolean p_176473_4_)
     {
         return true;
-    }
+    }*/
 
     @Override
     public boolean canUseBonemeal(World worldIn, Random p_180670_2_, BlockPos p_180670_3_, IBlockState p_180670_4_)
@@ -164,6 +174,10 @@ public class BlockNorthSapling extends BlockBush implements IGrowable {
             }
             catch (NoSuchFieldError ignored) {}
         }
+    }
+
+    public String getTypeString(){
+        return TYPE_PROP_N.toString();
     }
 
     public static enum EnumType implements IStringSerializable {

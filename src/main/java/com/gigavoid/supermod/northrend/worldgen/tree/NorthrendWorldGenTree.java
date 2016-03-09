@@ -1,8 +1,6 @@
 package com.gigavoid.supermod.northrend.worldgen.tree;
 
-import com.gigavoid.supermod.northrend.block.BlockNorthLeaves;
-import com.gigavoid.supermod.northrend.block.BlockNorthSapling;
-import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
+import com.gigavoid.supermod.northrend.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyEnum;
@@ -36,11 +34,11 @@ public class NorthrendWorldGenTree extends WorldGenAbstractTree {
             for (int j = -1; j < 2; j++){
                 for (int k = -1; k < 2; k++){
                     int i1 = i == 0 ? 0 : 4;
-                    noTreesNear = world.getBlockState(pos.add(j, i1, k)).getBlock() != NorthrendBlocks.northLog;
+                    noTreesNear = world.getBlockState(pos.add(j, i1, k)).getBlock() != BlockNorthLog.instance;
                 }
             }
         }
-        if (noTreesNear && world.getBlockState(pos.offsetDown(2)) == NorthrendBlocks.northDirt.getDefaultState()) {
+        if (noTreesNear && world.getBlockState(pos.down(2)) == BlockNorthDirt.instance.getDefaultState()) {
             if (type == TreeType.PINE)
                 genPineTree(world, random, pos);
             else if (type == TreeType.FIR)
@@ -58,17 +56,17 @@ public class NorthrendWorldGenTree extends WorldGenAbstractTree {
         if (pos.getY() < 80) {
             int height = 4 + random.nextInt(3);
             for (int k = - 1; k < height; k++) {
-                world.setBlockState(pos.add(0, k, 0), NorthrendBlocks.northLog.getDefaultState().withProperty(AXIS_PROP, BlockLog.EnumAxis.func_176870_a(EnumFacing.Axis.Y)));
+                world.setBlockState(pos.add(0, k, 0), BlockNorthLog.instance.getDefaultState().withProperty(AXIS_PROP, BlockLog.EnumAxis.fromFacingAxis(EnumFacing.Axis.Y)));
             }
             genTreeHead(world, random, pos.add(0, height - 1, 0));
         }
     }
 
     private void genTreeHead(World world, Random r, BlockPos pos) {
-        BlockNorthLeaves leaves = NorthrendBlocks.northLeaves;
+        BlockNorthLeaves leaves = BlockNorthLeaves.instance;
         leaves.setDropType(BlockNorthSapling.EnumType.PINE);
         IBlockState block;
-        world.setBlockState(pos.offsetUp(), leaves.getDefaultState());
+        world.setBlockState(pos.up(), leaves.getDefaultState());
         for (int i = -2; i < 3; i++) {
             for (int j = -2; j < 3; j++) {
                 if ((world.getBlockState(pos.add(i, 0, j)).getBlock() == Blocks.air || world.getBlockState(pos.add(i, 0, j)).getBlock() == Blocks.snow_layer) && northTreeHead[(i + 2) + 5 * (j + 2)]) {
@@ -96,14 +94,14 @@ public class NorthrendWorldGenTree extends WorldGenAbstractTree {
         if (pos.getY() < 80) {
             int height = 5 + random.nextInt(3);
             for (int k = - 1; k < height; k++) {
-                world.setBlockState(pos.add(0, k, 0), NorthrendBlocks.northLog.getDefaultState().withProperty(AXIS_PROP, BlockLog.EnumAxis.func_176870_a(EnumFacing.Axis.Y)));
+                world.setBlockState(pos.add(0, k, 0), BlockNorthLog.instance.getDefaultState().withProperty(AXIS_PROP, BlockLog.EnumAxis.fromFacingAxis(EnumFacing.Axis.Y)));
             }
             genTreeHeadFir(world, random, pos, height);
         }
     }
 
     private void genTreeHeadFir(World world, Random r, BlockPos pos, int height) {
-        BlockNorthLeaves leaves = NorthrendBlocks.northLeaves;
+        BlockNorthLeaves leaves = BlockNorthLeaves.instance;
         leaves.setDropType(BlockNorthSapling.EnumType.FIR);
         IBlockState block;
         for (int i = -2; i < 3; i++) {
@@ -155,14 +153,14 @@ public class NorthrendWorldGenTree extends WorldGenAbstractTree {
         if (pos.getY() < 80) {
             int height = 4 + random.nextInt(3);
             for (int k = - 1; k < height; k++) {
-                this.func_175905_a(world, pos.offsetUp(k), Blocks.log, 2);
+                this.func_175905_a(world, pos.up(k), Blocks.log, 2);
             }
             genTreeHeadBirch(world, random, pos, height);
         }
     }
 
     private void genTreeHeadBirch(World world, Random r, BlockPos pos, int height){
-        BlockNorthLeaves leaves = NorthrendBlocks.northLeaves;
+        BlockNorthLeaves leaves = BlockNorthLeaves.instance;
         leaves.setDropType(BlockNorthSapling.EnumType.BIRCH);
         IBlockState block;
         //i = x, k = y, j = z

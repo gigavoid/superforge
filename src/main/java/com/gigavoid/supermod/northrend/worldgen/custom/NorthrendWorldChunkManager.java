@@ -1,6 +1,5 @@
 package com.gigavoid.supermod.northrend.worldgen.custom;
 
-import com.gigavoid.supermod.cookiecraft.worldgen.CookiecraftGenLayerBiome;
 import com.gigavoid.supermod.northrend.biome.NorthrendBiomeGenBase;
 import com.gigavoid.supermod.northrend.biome.NorthrendBiomes;
 import com.google.common.collect.Lists;
@@ -32,7 +31,8 @@ public class NorthrendWorldChunkManager extends WorldChunkManager
             (NorthrendBiomeGenBase)NorthrendBiomes.northGlacier, (NorthrendBiomeGenBase)NorthrendBiomes.northMountains,
             (NorthrendBiomeGenBase)NorthrendBiomes.northPlains, (NorthrendBiomeGenBase)NorthrendBiomes.northHighlands,
             (NorthrendBiomeGenBase)NorthrendBiomes.northHugeMountains, (NorthrendBiomeGenBase)NorthrendBiomes.northBirchForest,
-            (NorthrendBiomeGenBase)NorthrendBiomes.northHills, (NorthrendBiomeGenBase)NorthrendBiomes.northSpikes);
+            (NorthrendBiomeGenBase)NorthrendBiomes.northHills, (NorthrendBiomeGenBase)NorthrendBiomes.northSpikes,
+            (NorthrendBiomeGenBase)NorthrendBiomes.northBlight);
     private GenLayer genBiomes;
     /** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
     private GenLayer biomeIndexLayer;

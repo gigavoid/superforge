@@ -20,7 +20,9 @@ import java.util.Random;
  * Created by Rasmus on 2014-11-06.
  */
 public class BlockNorthStone extends Block {
-    public BlockNorthStone(){
+    public static BlockNorthStone instance = new BlockNorthStone();
+
+    private BlockNorthStone(){
         super(Material.rock);
         this.setHardness(2.0f);
         this.setHarvestLevel("pickaxe", 0);

@@ -1,5 +1,6 @@
 package com.gigavoid.supermod.northrend.worldgen.feature;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthCobblestone;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
@@ -68,7 +69,7 @@ public class NorthrendWorldGenDungeons extends WorldGenerator {
                         return false;
                     }
 
-                    if ((l1 == j || l1 == k || j2 == i1 || j2 == j1) && i2 == 0 && worldIn.isAirBlock(blockpos1) && worldIn.isAirBlock(blockpos1.offsetUp()))
+                    if ((l1 == j || l1 == k || j2 == i1 || j2 == j1) && i2 == 0 && worldIn.isAirBlock(blockpos1) && worldIn.isAirBlock(blockpos1.up()))
                     {
                         ++k1;
                     }
@@ -93,7 +94,7 @@ public class NorthrendWorldGenDungeons extends WorldGenerator {
                                 worldIn.setBlockToAir(blockpos1);
                             }
                         }
-                        else if (blockpos1.getY() >= 0 && !worldIn.getBlockState(blockpos1.offsetDown()).getBlock().getMaterial().isSolid())
+                        else if (blockpos1.getY() >= 0 && !worldIn.getBlockState(blockpos1.down()).getBlock().getMaterial().isSolid())
                         {
                             worldIn.setBlockToAir(blockpos1);
                         }
@@ -101,11 +102,11 @@ public class NorthrendWorldGenDungeons extends WorldGenerator {
                         {
                             if (i2 == -1 && p_180709_2_.nextInt(4) != 0)
                             {
-                                worldIn.setBlockState(blockpos1, NorthrendBlocks.northCobble.getDefaultState(), 2);
+                                worldIn.setBlockState(blockpos1, BlockNorthCobblestone.instance.getDefaultState(), 2);
                             }
                             else
                             {
-                                worldIn.setBlockState(blockpos1, NorthrendBlocks.northCobble.getDefaultState(), 2);
+                                worldIn.setBlockState(blockpos1, BlockNorthCobblestone.instance.getDefaultState(), 2);
                             }
                         }
                     }
@@ -146,7 +147,7 @@ public class NorthrendWorldGenDungeons extends WorldGenerator {
 
                                 if (k2 == 1)
                                 {
-                                    worldIn.setBlockState(blockpos2, Blocks.chest.func_176458_f(worldIn, blockpos2, Blocks.chest.getDefaultState()), 2);
+                                    worldIn.setBlockState(blockpos2, Blocks.chest.correctFacing(worldIn, blockpos2, Blocks.chest.getDefaultState()), 2);
                                     TileEntity tileentity1 = worldIn.getTileEntity(blockpos2);
 
                                     if (tileentity1 instanceof TileEntityChest)

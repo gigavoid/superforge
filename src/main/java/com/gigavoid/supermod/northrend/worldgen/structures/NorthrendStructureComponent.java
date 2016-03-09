@@ -1,5 +1,7 @@
 package com.gigavoid.supermod.northrend.worldgen.structures;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthCobblestone;
+import com.gigavoid.supermod.northrend.block.BlockNorthStoneStairs;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
@@ -63,8 +65,8 @@ public abstract class NorthrendStructureComponent extends StructureComponent {
             }
         }
         else if (block != Blocks.stone_stairs && block != Blocks.oak_stairs && block != Blocks.nether_brick_stairs
-                && block != Blocks.stone_brick_stairs && block != Blocks.sandstone_stairs && block != NorthrendBlocks.northCobbleStairs
-                && block != NorthrendBlocks.northStairs)
+                && block != Blocks.stone_brick_stairs && block != Blocks.sandstone_stairs && block != BlockNorthCobblestone.instance
+                && block != BlockNorthStoneStairs.instance)
         {
             if (block == Blocks.ladder)
             {

@@ -1,5 +1,6 @@
 package com.gigavoid.supermod.northrend.item;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthSnowModded;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.gigavoid.supermod.northrend.creativetab.NorthrendCreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,7 @@ public class ItemNorthPearl extends Item {
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
         pos = pos.offset(side);
 
-        if (!playerIn.func_175151_a(pos, side, stack))
+        if (!playerIn.canPlayerEdit(pos, side, stack))
         {
             return false;
         }
@@ -36,7 +37,7 @@ public class ItemNorthPearl extends Item {
                 return true;
             }
             else if (Blocks.air == worldIn.getBlockState(pos).getBlock()){
-                worldIn.setBlockState(pos, NorthrendBlocks.snowLayerMod.getDefaultState());
+                worldIn.setBlockState(pos, BlockNorthSnowModded.instance.getDefaultState());
                 return true;
             }
 

@@ -82,16 +82,16 @@ public class BlockRopewayEngine extends Block implements ITileEntityProvider {
 
         switch (direction) {
             case NORTH:
-                popIfNoPylon(worldIn, pos, pos.offsetSouth());
+                popIfNoPylon(worldIn, pos, pos.south());
                 break;
             case EAST:
-                popIfNoPylon(worldIn, pos, pos.offsetWest());
+                popIfNoPylon(worldIn, pos, pos.west());
                 break;
             case SOUTH:
-                popIfNoPylon(worldIn, pos, pos.offsetNorth());
+                popIfNoPylon(worldIn, pos, pos.north());
                 break;
             case WEST:
-                popIfNoPylon(worldIn, pos, pos.offsetEast());
+                popIfNoPylon(worldIn, pos, pos.east());
                 break;
         }
     }

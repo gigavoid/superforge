@@ -25,7 +25,9 @@ import java.util.Random;
 public class BlockNorthGlaciemPlant extends BlockBush implements IGrowable {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 6);
 
-    protected BlockNorthGlaciemPlant()
+    public static BlockNorthGlaciemPlant instance = new BlockNorthGlaciemPlant();
+
+    private BlockNorthGlaciemPlant()
     {
         this.setTickRandomly(true);
         float f = 0.5F;
@@ -37,21 +39,26 @@ public class BlockNorthGlaciemPlant extends BlockBush implements IGrowable {
     }
 
     @Override
+    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+        return (Integer) state.getValue(AGE) < 6;
+    }
+
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() == NorthrendBlocks.northDirt;
+        return worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() == BlockNorthDirt.instance;
     }
 
     protected boolean canPlaceBlockOn(Block ground)
     {
-        return ground == NorthrendBlocks.northDirt;
+        return ground == BlockNorthDirt.instance;
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
 
-        if (worldIn.getLightFromNeighbors(pos.offsetUp()) >= 9)
+        if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
         {
             int i = (Integer) state.getValue(AGE);
 
@@ -82,7 +89,7 @@ public class BlockNorthGlaciemPlant extends BlockBush implements IGrowable {
     protected static float getGrowthChance(Block p_180672_0_, World worldIn, BlockPos p_180672_2_)
     {
         float f = 1.0F;
-        BlockPos blockpos1 = p_180672_2_.offsetDown();
+        BlockPos blockpos1 = p_180672_2_.down();
 
         for (int i = -1; i <= 1; ++i)
         {
@@ -110,10 +117,10 @@ public class BlockNorthGlaciemPlant extends BlockBush implements IGrowable {
             }
         }
 
-        BlockPos blockpos2 = p_180672_2_.offsetNorth();
-        BlockPos blockpos3 = p_180672_2_.offsetSouth();
-        BlockPos blockpos4 = p_180672_2_.offsetWest();
-        BlockPos blockpos5 = p_180672_2_.offsetEast();
+        BlockPos blockpos2 = p_180672_2_.north();
+        BlockPos blockpos3 = p_180672_2_.south();
+        BlockPos blockpos4 = p_180672_2_.west();
+        BlockPos blockpos5 = p_180672_2_.east();
         boolean flag = p_180672_0_ == worldIn.getBlockState(blockpos4).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos5).getBlock();
         boolean flag1 = p_180672_0_ == worldIn.getBlockState(blockpos2).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos3).getBlock();
 
@@ -123,7 +130,7 @@ public class BlockNorthGlaciemPlant extends BlockBush implements IGrowable {
         }
         else
         {
-            boolean flag2 = p_180672_0_ == worldIn.getBlockState(blockpos4.offsetNorth()).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos5.offsetNorth()).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos5.offsetSouth()).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos4.offsetSouth()).getBlock();
+            boolean flag2 = p_180672_0_ == worldIn.getBlockState(blockpos4.east()).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos5.north()).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos5.west()).getBlock() || p_180672_0_ == worldIn.getBlockState(blockpos4.south()).getBlock();
 
             if (flag2)
             {
@@ -136,12 +143,12 @@ public class BlockNorthGlaciemPlant extends BlockBush implements IGrowable {
 
     public boolean canBlockStay(World worldIn, BlockPos p_180671_2_, IBlockState p_180671_3_)
     {
-        return (worldIn.getLight(p_180671_2_) >= 8 || worldIn.canSeeSky(p_180671_2_)) && this.canPlaceBlockOn(worldIn.getBlockState(p_180671_2_.offsetDown()).getBlock());
+        return (worldIn.getLight(p_180671_2_) >= 8 || worldIn.canSeeSky(p_180671_2_)) && this.canPlaceBlockOn(worldIn.getBlockState(p_180671_2_.down()).getBlock());
     }
 
     protected Item getSeed()
     {
-        return Item.getItemFromBlock(NorthrendBlocks.northGlaciemPlant);
+        return Item.getItemFromBlock(BlockNorthGlaciemPlant.instance);
     }
 
     protected Item getCrop()

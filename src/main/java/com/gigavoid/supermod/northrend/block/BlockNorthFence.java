@@ -10,7 +10,9 @@ import net.minecraft.world.World;
  * Created by Rasmus on 2014-11-23.
  */
 public class BlockNorthFence extends BlockFence {
-    public BlockNorthFence(){
+    public static BlockNorthFence instance = new BlockNorthFence();
+
+    private BlockNorthFence(){
         super(Material.wood);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
     }

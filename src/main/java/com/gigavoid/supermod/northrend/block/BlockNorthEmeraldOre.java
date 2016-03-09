@@ -15,7 +15,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthEmeraldOre extends Block {
-    public BlockNorthEmeraldOre() {
+    public static BlockNorthEmeraldOre instance = new BlockNorthEmeraldOre();
+
+    private BlockNorthEmeraldOre() {
         super(Material.rock);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setHardness(3.0f);

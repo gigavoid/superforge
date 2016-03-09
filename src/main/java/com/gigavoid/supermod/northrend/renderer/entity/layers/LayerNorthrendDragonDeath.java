@@ -27,7 +27,7 @@ public class LayerNorthrendDragonDeath implements LayerRenderer {
             }
 
             Random random = new Random(432L);
-            GlStateManager.func_179090_x();
+            GlStateManager.disableTexture2D();
             GlStateManager.shadeModel(7425);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(770, 1);
@@ -48,9 +48,9 @@ public class LayerNorthrendDragonDeath implements LayerRenderer {
                 worldrenderer.startDrawing(6);
                 float f9 = random.nextFloat() * 20.0F + 5.0F + f8 * 10.0F;
                 float f10 = random.nextFloat() * 2.0F + 1.0F + f8 * 2.0F;
-                worldrenderer.func_178974_a(16777215, (int)(255.0F * (1.0F - f8)));
+                worldrenderer.setColorRGBA_I(16777215, (int) (255.0F * (1.0F - f8)));
                 worldrenderer.addVertex(0.0D, 0.0D, 0.0D);
-                worldrenderer.func_178974_a(16711935, 0);
+                worldrenderer.setColorRGBA_I(16711935, 0);
                 worldrenderer.addVertex(-0.866D * (double)f10, (double)f9, (double)(-0.5F * f10));
                 worldrenderer.addVertex(0.866D * (double)f10, (double)f9, (double)(-0.5F * f10));
                 worldrenderer.addVertex(0.0D, (double)f9, (double)(1.0F * f10));
@@ -64,7 +64,7 @@ public class LayerNorthrendDragonDeath implements LayerRenderer {
             GlStateManager.disableBlend();
             GlStateManager.shadeModel(7424);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            GlStateManager.func_179098_w();
+            GlStateManager.enableTexture2D();
             GlStateManager.enableAlpha();
             RenderHelper.enableStandardItemLighting();
         }

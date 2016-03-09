@@ -15,7 +15,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthDiamondOre extends Block {
-    public BlockNorthDiamondOre() {
+    public static BlockNorthDiamondOre instance = new BlockNorthDiamondOre();
+
+    private BlockNorthDiamondOre() {
         super(Material.rock);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setHardness(3.0f);

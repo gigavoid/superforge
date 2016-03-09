@@ -1,5 +1,8 @@
 {
     "variants": {
-        "normal": { "model": "supermod:north_leaves" }
+        "check_decay=true,decayable=true": { "model": "supermod:north_leaves" },
+        "check_decay=true,decayable=false": { "model": "supermod:north_leaves" },
+        "check_decay=false,decayable=true": { "model": "supermod:north_leaves" },
+        "check_decay=false,decayable=false": { "model": "supermod:north_leaves" }
     }
 }

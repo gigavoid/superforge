@@ -1,5 +1,7 @@
 package com.gigavoid.supermod.common.util;
 
+import net.minecraft.block.Block;
+
 import java.lang.reflect.Field;
 
 public class Reflection {
@@ -16,6 +18,17 @@ public class Reflection {
         return null;
     }
 
+    public static boolean setFieldValue(String fieldName, Class clazz, Object value) {
+        Field field = getField(clazz, fieldName);
+        field.setAccessible(true);
+
+        try {
+            field.set(value, value);
+        } catch (IllegalAccessException e){
+            return false;
+        }
+        return true;
+    }
 
     private static Field getField(Class clazz, String fieldName) {
         try {

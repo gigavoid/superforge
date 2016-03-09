@@ -12,14 +12,14 @@ import java.util.Random;
  * Created by Rasmus on 2014-11-23.
  */
 public class BlockNorthStairs extends BlockStairs {
+    public static BlockNorthStairs instance = new BlockNorthStairs();
 
-
-    protected BlockNorthStairs(int p_i45428_2_)
+    private BlockNorthStairs()
     {
-        super(NorthrendBlocks.northPlanks.getDefaultState());
+        super(BlockNorthPlanks.instance.getDefaultState());
         this.setHardness(.75f);
         this.setResistance(2.0f);
-        this.setStepSound(NorthrendBlocks.northPlanks.stepSound);
+        this.setStepSound(BlockNorthPlanks.instance.stepSound);
         this.setLightOpacity(255);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
     }

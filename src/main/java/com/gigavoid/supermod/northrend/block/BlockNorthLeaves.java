@@ -21,9 +21,11 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockNorthLeaves extends BlockLeaves {
+    public static BlockNorthLeaves instance = new BlockNorthLeaves();
+
     private BlockNorthSapling.EnumType type = BlockNorthSapling.EnumType.PINE;
 
-    public BlockNorthLeaves(){
+    private BlockNorthLeaves(){
         super();
         this.setHardness(1.0f);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
@@ -43,13 +45,13 @@ public class BlockNorthLeaves extends BlockLeaves {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        Item item = Item.getItemFromBlock(NorthrendBlocks.northPineSapling);
+        Item item = Item.getItemFromBlock(BlockNorthSapling.instance_pine);
 
         if (this.type == BlockNorthSapling.EnumType.FIR){
-            item = Item.getItemFromBlock(NorthrendBlocks.northFirSapling);
+            item = Item.getItemFromBlock(BlockNorthSapling.instance_fir);
         }
         else if (this.type == BlockNorthSapling.EnumType.BIRCH){
-            item = Item.getItemFromBlock(NorthrendBlocks.northBirchSapling);
+            item = Item.getItemFromBlock(BlockNorthSapling.instance_birch);
         }
 
         return item;
@@ -98,7 +100,7 @@ public class BlockNorthLeaves extends BlockLeaves {
     }
 
     @Override
-    public BlockPlanks.EnumType func_176233_b(int p_176233_1_) {
+    public BlockPlanks.EnumType getWoodType(int p_176233_1_) {
         return BlockPlanks.EnumType.SPRUCE;
     }
 
@@ -114,9 +116,8 @@ public class BlockNorthLeaves extends BlockLeaves {
     public int getMetaFromState(IBlockState state) { return 0; }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, BlockLeaves.field_176236_b);
+    protected BlockState createBlockState() {
+        return new BlockState(this, CHECK_DECAY, DECAYABLE);
     }
 
     @Override

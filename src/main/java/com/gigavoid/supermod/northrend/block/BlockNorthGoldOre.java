@@ -12,7 +12,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthGoldOre extends Block {
-    public BlockNorthGoldOre() {
+    public static BlockNorthGoldOre instance = new BlockNorthGoldOre();
+
+    private BlockNorthGoldOre() {
         super(Material.rock);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setHardness(3.0f);

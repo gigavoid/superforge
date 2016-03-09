@@ -1,5 +1,7 @@
 package com.gigavoid.supermod.northrend.worldgen.gen;
 
+import com.gigavoid.supermod.northrend.block.BlockNorthGlacialIce;
+import com.gigavoid.supermod.northrend.block.BlockNorthStone;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -17,7 +19,7 @@ public class NorthrendMapGenRavine extends MapGenRavine
         IBlockState top = biome.topBlock;
         IBlockState filler = biome.fillerBlock;
 
-        if (state.getBlock() == Blocks.stone || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock() || state.getBlock() == NorthrendBlocks.northStone || state.getBlock() == NorthrendBlocks.glacialIce)
+        if (state.getBlock() == Blocks.stone || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock() || state.getBlock() == BlockNorthStone.instance || state.getBlock() == BlockNorthGlacialIce.instance)
         {
             if (y < 10)
             {

@@ -20,22 +20,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BlockNorthRedstoneOre extends Block{
+    public static BlockNorthRedstoneOre instance = new BlockNorthRedstoneOre(false);
+    public static BlockNorthRedstoneOre instance_lit = new BlockNorthRedstoneOre(true);
+
     private final boolean isOn;
 
-    public BlockNorthRedstoneOre(boolean p_i45420_1_)
+    private BlockNorthRedstoneOre(boolean lit)
     {
         super(Material.rock);
         setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
         this.setHardness(3.0f);
         this.setHarvestLevel("pickaxe", 2);
 
-        if (p_i45420_1_)
+        if (lit)
         {
             this.setTickRandomly(true);
             setLightLevel(.5f);
         }
 
-        this.isOn = p_i45420_1_;
+        this.isOn = lit;
     }
 
     /**
@@ -71,17 +74,17 @@ public class BlockNorthRedstoneOre extends Block{
     {
         this.spawnRedstoneParticles(worldIn, p_176352_2_);
 
-        if (this == NorthrendBlocks.redstoneOre)
+        if (this == instance)
         {
-            worldIn.setBlockState(p_176352_2_, NorthrendBlocks.lit_redstoneOre.getDefaultState());
+            worldIn.setBlockState(p_176352_2_, instance_lit.getDefaultState());
         }
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        if (this == NorthrendBlocks.lit_redstoneOre)
+        if (this == instance_lit)
         {
-            worldIn.setBlockState(pos, NorthrendBlocks.redstoneOre.getDefaultState());
+            worldIn.setBlockState(pos, instance.getDefaultState());
         }
     }
 
@@ -152,32 +155,32 @@ public class BlockNorthRedstoneOre extends Block{
             double d2 = (double)((float)p_180691_2_.getY() + random.nextFloat());
             double d3 = (double)((float)p_180691_2_.getZ() + random.nextFloat());
 
-            if (i == 0 && !worldIn.getBlockState(p_180691_2_.offsetUp()).getBlock().isOpaqueCube())
+            if (i == 0 && !worldIn.getBlockState(p_180691_2_.up()).getBlock().isOpaqueCube())
             {
                 d2 = (double)p_180691_2_.getY() + d0 + 1.0D;
             }
 
-            if (i == 1 && !worldIn.getBlockState(p_180691_2_.offsetDown()).getBlock().isOpaqueCube())
+            if (i == 1 && !worldIn.getBlockState(p_180691_2_.down()).getBlock().isOpaqueCube())
             {
                 d2 = (double)p_180691_2_.getY() - d0;
             }
 
-            if (i == 2 && !worldIn.getBlockState(p_180691_2_.offsetSouth()).getBlock().isOpaqueCube())
+            if (i == 2 && !worldIn.getBlockState(p_180691_2_.south()).getBlock().isOpaqueCube())
             {
                 d3 = (double)p_180691_2_.getZ() + d0 + 1.0D;
             }
 
-            if (i == 3 && !worldIn.getBlockState(p_180691_2_.offsetNorth()).getBlock().isOpaqueCube())
+            if (i == 3 && !worldIn.getBlockState(p_180691_2_.north()).getBlock().isOpaqueCube())
             {
                 d3 = (double)p_180691_2_.getZ() - d0;
             }
 
-            if (i == 4 && !worldIn.getBlockState(p_180691_2_.offsetEast()).getBlock().isOpaqueCube())
+            if (i == 4 && !worldIn.getBlockState(p_180691_2_.east()).getBlock().isOpaqueCube())
             {
                 d1 = (double)p_180691_2_.getX() + d0 + 1.0D;
             }
 
-            if (i == 5 && !worldIn.getBlockState(p_180691_2_.offsetWest()).getBlock().isOpaqueCube())
+            if (i == 5 && !worldIn.getBlockState(p_180691_2_.west()).getBlock().isOpaqueCube())
             {
                 d1 = (double)p_180691_2_.getX() - d0;
             }
@@ -191,6 +194,6 @@ public class BlockNorthRedstoneOre extends Block{
 
     protected ItemStack createStackedBlock(IBlockState state)
     {
-        return new ItemStack(NorthrendBlocks.redstoneOre);
+        return new ItemStack(instance);
     }
 }

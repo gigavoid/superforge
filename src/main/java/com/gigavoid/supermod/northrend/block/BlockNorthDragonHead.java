@@ -15,7 +15,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthDragonHead extends Block {
-    public BlockNorthDragonHead() {
+    public static BlockNorthDragonHead instance = new BlockNorthDragonHead();
+
+    private BlockNorthDragonHead() {
         super(Material.rock);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
     }

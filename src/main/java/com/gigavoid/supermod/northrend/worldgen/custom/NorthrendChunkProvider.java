@@ -1,5 +1,9 @@
 package com.gigavoid.supermod.northrend.worldgen.custom;
 
+import com.gigavoid.supermod.northrend.biome.NorthrendBiomes;
+import com.gigavoid.supermod.northrend.block.BlockNorthGlacialIce;
+import com.gigavoid.supermod.northrend.block.BlockNorthPoisonFluid;
+import com.gigavoid.supermod.northrend.block.BlockNorthStone;
 import com.gigavoid.supermod.northrend.block.NorthrendBlocks;
 import com.gigavoid.supermod.northrend.worldgen.feature.NorthrendWorldGenDungeons;
 import com.gigavoid.supermod.northrend.worldgen.gen.*;
@@ -86,9 +90,10 @@ public class NorthrendChunkProvider implements IChunkProvider {
 
     public NorthrendChunkProvider(World worldIn, long p_i45636_2_, boolean p_i45636_4_, String p_i45636_5_)
     {
+        this.rand = new Random(p_i45636_2_);
         this.oceanFiller = Blocks.ice;
         this.stoneNoise = new double[256];
-        this.caveGenerator = new NorthrendMapGenCaves();
+        this.caveGenerator = new NorthrendMapGenCaves(rand);
         this.netherBridgeGenerator = new NorthrendMapGenFortress();
         this.villageGenerator = new NorthrendMapGenVillage();
         this.mineshaftGenerator = new NorthrendMapGenMineshaft();
@@ -98,7 +103,6 @@ public class NorthrendChunkProvider implements IChunkProvider {
         this.worldObj = worldIn;
         this.mapFeaturesEnabled = p_i45636_4_;
         this.worldType = worldIn.getWorldInfo().getTerrainType();
-        this.rand = new Random(p_i45636_2_);
         this.field_147431_j = new NoiseGeneratorOctaves(this.rand, 16);
         this.field_147432_k = new NoiseGeneratorOctaves(this.rand, 16);
         this.field_147429_l = new NoiseGeneratorOctaves(this.rand, 8);
@@ -121,7 +125,7 @@ public class NorthrendChunkProvider implements IChunkProvider {
         if (p_i45636_5_ != null)
         {
             this.chunkProviderSettings = ChunkProviderSettings.Factory.func_177865_a(p_i45636_5_).func_177864_b();
-            this.oceanFiller = NorthrendBlocks.glacialIce;
+            this.oceanFiller = BlockNorthGlacialIce.instance;
         }
 
         NoiseGenerator[] noiseGens = {field_147431_j, field_147432_k, field_147429_l, field_147430_m, noiseGen5, noiseGen6, mobSpawnerNoise};
@@ -140,31 +144,31 @@ public class NorthrendChunkProvider implements IChunkProvider {
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, p_180518_1_ * 4 - 2, p_180518_2_ * 4 - 2, 10, 10);
         this.func_147423_a(p_180518_1_ * 4, 0, p_180518_2_ * 4);
 
-        for (int k = 0; k < 4; ++k)
+        for (int x = 0; x < 4; ++x)
         {
-            int l = k * 5;
-            int i1 = (k + 1) * 5;
+            int l = x * 5;
+            int i1 = (x + 1) * 5;
 
-            for (int j1 = 0; j1 < 4; ++j1)
+            for (int z = 0; z < 4; ++z)
             {
-                int k1 = (l + j1) * 33;
-                int l1 = (l + j1 + 1) * 33;
-                int i2 = (i1 + j1) * 33;
-                int j2 = (i1 + j1 + 1) * 33;
+                int k1 = (l + z) * 33;
+                int l1 = (l + z + 1) * 33;
+                int i2 = (i1 + z) * 33;
+                int j2 = (i1 + z + 1) * 33;
 
-                for (int k2 = 0; k2 < 32; ++k2)
+                for (int y = 0; y < 32; ++y)
                 {
                     double d0 = 0.125D;
-                    double d1 = this.field_147434_q[k1 + k2];
-                    double d2 = this.field_147434_q[l1 + k2];
-                    double d3 = this.field_147434_q[i2 + k2];
-                    double d4 = this.field_147434_q[j2 + k2];
-                    double d5 = (this.field_147434_q[k1 + k2 + 1] - d1) * d0;
-                    double d6 = (this.field_147434_q[l1 + k2 + 1] - d2) * d0;
-                    double d7 = (this.field_147434_q[i2 + k2 + 1] - d3) * d0;
-                    double d8 = (this.field_147434_q[j2 + k2 + 1] - d4) * d0;
+                    double d1 = this.field_147434_q[k1 + y];
+                    double d2 = this.field_147434_q[l1 + y];
+                    double d3 = this.field_147434_q[i2 + y];
+                    double d4 = this.field_147434_q[j2 + y];
+                    double d5 = (this.field_147434_q[k1 + y + 1] - d1) * d0;
+                    double d6 = (this.field_147434_q[l1 + y + 1] - d2) * d0;
+                    double d7 = (this.field_147434_q[i2 + y + 1] - d3) * d0;
+                    double d8 = (this.field_147434_q[j2 + y + 1] - d4) * d0;
 
-                    for (int l2 = 0; l2 < 8; ++l2)
+                    for (int y1 = 0; y1 < 8; ++y1)
                     {
                         double d9 = 0.25D;
                         double d10 = d1;
@@ -172,21 +176,26 @@ public class NorthrendChunkProvider implements IChunkProvider {
                         double d12 = (d3 - d1) * d9;
                         double d13 = (d4 - d2) * d9;
 
-                        for (int i3 = 0; i3 < 4; ++i3)
+                        for (int x1 = 0; x1 < 4; ++x1)
                         {
                             double d14 = 0.25D;
                             double d16 = (d11 - d10) * d14;
                             double d15 = d10 - d16;
 
-                            for (int j3 = 0; j3 < 4; ++j3)
+                            for (int z1 = 0; z1 < 4; ++z1)
                             {
                                 if ((d15 += d16) > 0.0D)
                                 {
-                                    p_180518_3_.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, NorthrendBlocks.northStone.getDefaultState());
+                                    p_180518_3_.setBlockState(x * 4 + x1, y * 8 + y1, z * 4 + z1, BlockNorthStone.instance.getDefaultState());
                                 }
-                                else if (k2 * 8 + l2 < this.chunkProviderSettings.field_177841_q)
+                                else if (y * 8 + y1 < this.chunkProviderSettings.seaLevel)
                                 {
-                                    p_180518_3_.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + j3, this.oceanFiller.getDefaultState());
+                                    /*BiomeGenBase biomeAtCoords = this.worldObj.getBiomeGenForCoords(new BlockPos(x * 4 + x1, y * 8 + y1, z * 4 + z1));
+                                    int biomeID = biomeAtCoords.biomeID;
+                                    if (biomeID != NorthrendBiomes.northBlight.biomeID) {
+                                        p_180518_3_.setBlockState(x * 4 + x1, y * 8 + y1, z * 4 + z1, this.oceanFiller.getDefaultState());
+                                    }*/
+                                    p_180518_3_.setBlockState(x * 4 + x1, y * 8 + y1, z * 4 + z1, this.oceanFiller.getDefaultState());
                                 }
                             }
 
@@ -235,37 +244,37 @@ public class NorthrendChunkProvider implements IChunkProvider {
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, p_73154_1_ * 16, p_73154_2_ * 16, 16, 16);
         this.func_180517_a(p_73154_1_, p_73154_2_, chunkprimer, this.biomesForGeneration);
 
-        if (this.chunkProviderSettings.field_177839_r)
+        if (this.chunkProviderSettings.useCaves)
         {
             this.caveGenerator.func_175792_a(this, this.worldObj, p_73154_1_, p_73154_2_, chunkprimer);
         }
 
-        if (this.chunkProviderSettings.field_177850_z)
+        if (this.chunkProviderSettings.useRavines)
         {
             this.ravineGenerator.func_175792_a(this, this.worldObj, p_73154_1_, p_73154_2_, chunkprimer);
         }
 
-        if (this.chunkProviderSettings.field_177829_w && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useMineShafts && this.mapFeaturesEnabled)
         {
             this.mineshaftGenerator.func_175792_a(this, this.worldObj, p_73154_1_, p_73154_2_, chunkprimer);
         }
 
-        if (this.chunkProviderSettings.field_177831_v && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useVillages && this.mapFeaturesEnabled)
         {
             this.villageGenerator.func_175792_a(this, this.worldObj, p_73154_1_, p_73154_2_, chunkprimer);
         }
 
-        if (this.chunkProviderSettings.field_177833_u && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useStrongholds && this.mapFeaturesEnabled)
         {
             this.netherBridgeGenerator.func_175792_a(this, this.worldObj, p_73154_1_, p_73154_2_, chunkprimer);
         }
 
-        if (this.chunkProviderSettings.field_177854_x && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useTemples && this.mapFeaturesEnabled)
         {
             this.scatteredFeatureGenerator.func_175792_a(this, this.worldObj, p_73154_1_, p_73154_2_, chunkprimer);
         }
 
-        if (this.chunkProviderSettings.field_177852_y && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useMonuments && this.mapFeaturesEnabled)
         {
             this.oceanTempleGenerator.func_175792_a(this, this.worldObj, p_73154_1_, p_73154_2_, chunkprimer);
         }
@@ -284,10 +293,10 @@ public class NorthrendChunkProvider implements IChunkProvider {
 
     private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_)
     {
-        this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, (double)this.chunkProviderSettings.field_177808_e, (double)this.chunkProviderSettings.field_177803_f, (double)this.chunkProviderSettings.field_177804_g);
-        float f = this.chunkProviderSettings.field_177811_a;
-        float f1 = this.chunkProviderSettings.field_177809_b;
-        this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double)(f / this.chunkProviderSettings.field_177825_h), (double)(f1 / this.chunkProviderSettings.field_177827_i), (double)(f / this.chunkProviderSettings.field_177821_j));
+        this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, (double)this.chunkProviderSettings.depthNoiseScaleX, (double)this.chunkProviderSettings.depthNoiseScaleZ, (double)this.chunkProviderSettings.depthNoiseScaleExponent);
+        float f = this.chunkProviderSettings.coordinateScale;
+        float f1 = this.chunkProviderSettings.heightScale;
+        this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double)(f / this.chunkProviderSettings.mainNoiseScaleX), (double)(f1 / this.chunkProviderSettings.mainNoiseScaleY), (double)(f / this.chunkProviderSettings.mainNoiseScaleZ));
         this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double)f, (double)f1, (double)f);
         this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double)f, (double)f1, (double)f);
         int l = 0;
@@ -308,8 +317,8 @@ public class NorthrendChunkProvider implements IChunkProvider {
                     for (int i2 = -b0; i2 <= b0; ++i2)
                     {
                         BiomeGenBase biomegenbase1 = this.biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
-                        float f5 = this.chunkProviderSettings.field_177813_n + biomegenbase1.minHeight * this.chunkProviderSettings.field_177819_m;
-                        float f6 = this.chunkProviderSettings.field_177843_p + biomegenbase1.maxHeight * this.chunkProviderSettings.field_177815_o;
+                        float f5 = this.chunkProviderSettings.biomeDepthOffSet + biomegenbase1.minHeight * this.chunkProviderSettings.biomeDepthWeight;
+                        float f6 = this.chunkProviderSettings.biomeScaleOffset + biomegenbase1.maxHeight * this.chunkProviderSettings.biomeScaleWeight;
 
                         if (this.worldType == net.minecraft.world.WorldType.AMPLIFIED && f5 > 0.0F)
                         {
@@ -369,20 +378,20 @@ public class NorthrendChunkProvider implements IChunkProvider {
                 double d8 = (double)f3;
                 double d9 = (double)f2;
                 d8 += d7 * 0.2D;
-                d8 = d8 * (double)this.chunkProviderSettings.field_177823_k / 8.0D;
-                double d0 = (double)this.chunkProviderSettings.field_177823_k + d8 * 4.0D;
+                d8 = d8 * (double)this.chunkProviderSettings.baseSize / 8.0D;
+                double d0 = (double)this.chunkProviderSettings.baseSize + d8 * 4.0D;
 
                 for (int j2 = 0; j2 < 33; ++j2)
                 {
-                    double d1 = ((double)j2 - d0) * (double)this.chunkProviderSettings.field_177817_l * 128.0D / 256.0D / d9;
+                    double d1 = ((double)j2 - d0) * (double)this.chunkProviderSettings.stretchY * 128.0D / 256.0D / d9;
 
                     if (d1 < 0.0D)
                     {
                         d1 *= 4.0D;
                     }
 
-                    double d2 = this.field_147428_e[l] / (double)this.chunkProviderSettings.field_177806_d;
-                    double d3 = this.field_147425_f[l] / (double)this.chunkProviderSettings.field_177810_c;
+                    double d2 = this.field_147428_e[l] / (double)this.chunkProviderSettings.lowerLimitScale;
+                    double d3 = this.field_147425_f[l] / (double)this.chunkProviderSettings.upperLimitScale;
                     double d4 = (this.field_147427_d[l] / 10.0D + 1.0D) / 2.0D;
                     double d5 = MathHelper.denormalizeClamp(d2, d3, d4) - d1;
 
@@ -426,27 +435,27 @@ public class NorthrendChunkProvider implements IChunkProvider {
 
         MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag));
 
-        if (this.chunkProviderSettings.field_177829_w && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useMineShafts && this.mapFeaturesEnabled)
         {
             this.mineshaftGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
         }
 
-        if (this.chunkProviderSettings.field_177831_v && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useVillages && this.mapFeaturesEnabled)
         {
             flag = this.villageGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
         }
 
-        if (this.chunkProviderSettings.field_177833_u && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useStrongholds && this.mapFeaturesEnabled)
         {
             this.netherBridgeGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
         }
 
-        if (this.chunkProviderSettings.field_177854_x && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useTemples && this.mapFeaturesEnabled)
         {
             this.scatteredFeatureGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
         }
 
-        if (this.chunkProviderSettings.field_177852_y && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useMonuments && this.mapFeaturesEnabled)
         {
             this.oceanTempleGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
         }
@@ -455,7 +464,7 @@ public class NorthrendChunkProvider implements IChunkProvider {
         int l1;
         int i2;
 
-        if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && this.chunkProviderSettings.field_177781_A && !flag && this.rand.nextInt(this.chunkProviderSettings.field_177782_B) == 0
+        if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && this.chunkProviderSettings.useWaterLakes && !flag && this.rand.nextInt(this.chunkProviderSettings.waterLakeChance) == 0
                 && TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAKE))
         {
             k1 = this.rand.nextInt(16) + 8;
@@ -464,22 +473,22 @@ public class NorthrendChunkProvider implements IChunkProvider {
             (new WorldGenLakes(Blocks.ice)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
         }
 
-        if (TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAVA) && !flag && this.rand.nextInt(this.chunkProviderSettings.field_177777_D / 10) == 0 && this.chunkProviderSettings.field_177783_C)
+        if (TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAVA) && !flag && this.rand.nextInt(this.chunkProviderSettings.lavaLakeChance / 10) == 0 && this.chunkProviderSettings.useLavaLakes)
         {
             k1 = this.rand.nextInt(16) + 8;
             l1 = this.rand.nextInt(this.rand.nextInt(248) + 8);
             i2 = this.rand.nextInt(16) + 8;
 
-            if (l1 < 63 || this.rand.nextInt(this.chunkProviderSettings.field_177777_D / 8) == 0)
+            if (l1 < 63 || this.rand.nextInt(this.chunkProviderSettings.lavaLakeChance / 8) == 0 && biomegenbase != NorthrendBiomes.northGlacier)
             {
-                (new WorldGenLakes(Blocks.obsidian)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
+                (new WorldGenLakes(BlockNorthPoisonFluid.instance)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
             }
         }
 
-        if (this.chunkProviderSettings.field_177837_s)
+        if (this.chunkProviderSettings.useDungeons)
         {
             boolean doGen = TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, DUNGEON);
-            for (k1 = 0; doGen && k1 < this.chunkProviderSettings.field_177835_t; ++k1)
+            for (k1 = 0; doGen && k1 < this.chunkProviderSettings.dungeonChance; ++k1)
             {
                 l1 = this.rand.nextInt(16) + 8;
                 i2 = this.rand.nextInt(256);
@@ -488,7 +497,7 @@ public class NorthrendChunkProvider implements IChunkProvider {
             }
         }
 
-        biomegenbase.func_180624_a(this.worldObj, this.rand, new BlockPos(k, 0, l));
+        biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(k, 0, l));
         if (TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, ANIMALS))
         {
             SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
@@ -500,15 +509,15 @@ public class NorthrendChunkProvider implements IChunkProvider {
         {
             for (l1 = 0; l1 < 16; ++l1)
             {
-                BlockPos blockpos1 = this.worldObj.func_175725_q(blockpos.add(k1, 0, l1));
-                BlockPos blockpos2 = blockpos1.offsetDown();
+                BlockPos blockpos1 = this.worldObj.getPrecipitationHeight(blockpos.add(k1, 0, l1));
+                BlockPos blockpos2 = blockpos1.down();
 
                 if (this.worldObj.func_175675_v(blockpos2))
                 {
                     this.worldObj.setBlockState(blockpos2, Blocks.ice.getDefaultState(), 2);
                 }
 
-                if (this.worldObj.func_175708_f(blockpos1, true))
+                if (this.worldObj.canSnowAt(blockpos1, true))
                 {
                     this.worldObj.setBlockState(blockpos1, Blocks.snow_layer.getDefaultState(), 2);
                 }
@@ -524,7 +533,7 @@ public class NorthrendChunkProvider implements IChunkProvider {
     {
         boolean flag = false;
 
-        if (this.chunkProviderSettings.field_177852_y && this.mapFeaturesEnabled && p_177460_2_.getInhabitedTime() < 3600L)
+        if (this.chunkProviderSettings.useMonuments && this.mapFeaturesEnabled && p_177460_2_.getInhabitedTime() < 3600L)
         {
             flag |= this.oceanTempleGenerator.func_175794_a(this.worldObj, this.rand, new ChunkCoordIntPair(p_177460_3_, p_177460_4_));
         }
@@ -582,7 +591,7 @@ public class NorthrendChunkProvider implements IChunkProvider {
                 return this.scatteredFeatureGenerator.getScatteredFeatureSpawnList();
             }
 
-            if (p_177458_1_ == EnumCreatureType.MONSTER && this.chunkProviderSettings.field_177852_y && this.oceanTempleGenerator.func_175796_a(this.worldObj, p_177458_2_))
+            if (p_177458_1_ == EnumCreatureType.MONSTER && this.chunkProviderSettings.useMonuments && this.oceanTempleGenerator.func_175796_a(this.worldObj, p_177458_2_))
             {
                 return this.oceanTempleGenerator.func_175799_b();
             }
@@ -591,9 +600,9 @@ public class NorthrendChunkProvider implements IChunkProvider {
         return biomegenbase.getSpawnableList(p_177458_1_);
     }
 
-    public BlockPos func_180513_a(World worldIn, String p_180513_2_, BlockPos p_180513_3_)
+    public BlockPos getStrongholdGen(World worldIn, String p_180513_2_, BlockPos p_180513_3_)
     {
-        return "Stronghold".equals(p_180513_2_) && this.netherBridgeGenerator != null ? this.netherBridgeGenerator.func_180706_b(worldIn, p_180513_3_) : null;
+        return "Stronghold".equals(p_180513_2_) && this.netherBridgeGenerator != null ? this.netherBridgeGenerator.getClosestStrongholdPos(worldIn, p_180513_3_) : null;
     }
 
     public int getLoadedChunkCount()
@@ -601,35 +610,35 @@ public class NorthrendChunkProvider implements IChunkProvider {
         return 0;
     }
 
-    public void func_180514_a(Chunk p_180514_1_, int p_180514_2_, int p_180514_3_)
+    public void recreateStructures(Chunk p_180514_1_, int p_180514_2_, int p_180514_3_)
     {
-        if (this.chunkProviderSettings.field_177829_w && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useMineShafts && this.mapFeaturesEnabled)
         {
             this.mineshaftGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
         }
 
-        if (this.chunkProviderSettings.field_177831_v && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useVillages && this.mapFeaturesEnabled)
         {
             this.villageGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
         }
 
-        if (this.chunkProviderSettings.field_177833_u && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useStrongholds && this.mapFeaturesEnabled)
         {
             this.netherBridgeGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
         }
 
-        if (this.chunkProviderSettings.field_177854_x && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useTemples && this.mapFeaturesEnabled)
         {
             this.scatteredFeatureGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
         }
 
-        if (this.chunkProviderSettings.field_177852_y && this.mapFeaturesEnabled)
+        if (this.chunkProviderSettings.useMonuments && this.mapFeaturesEnabled)
         {
             this.oceanTempleGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
         }
     }
 
-    public Chunk func_177459_a(BlockPos p_177459_1_)
+    public Chunk provideChunk(BlockPos p_177459_1_)
     {
         return this.provideChunk(p_177459_1_.getX() >> 4, p_177459_1_.getZ() >> 4);
     }

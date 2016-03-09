@@ -13,17 +13,14 @@ import java.util.Random;
  * Created by Rasmus on 2014-11-23.
  */
 public class BlockNorthStoneStairs extends BlockStairs {
-    private Block parentNorthBlock;
-    private int meta;
+    public static BlockNorthStoneStairs instance = new BlockNorthStoneStairs();
 
-    protected BlockNorthStoneStairs(int p_i45428_2_)
+    private BlockNorthStoneStairs()
     {
-        super(NorthrendBlocks.northCobble.getDefaultState());
-        parentNorthBlock = NorthrendBlocks.northCobble;
-        meta = p_i45428_2_;
+        super(BlockNorthCobblestone.instance.getDefaultState());
         this.setHardness(.75f);
         this.setResistance(2.0f);
-        this.setStepSound(NorthrendBlocks.northCobble.stepSound);
+        this.setStepSound(BlockNorthCobblestone.instance.stepSound);
         this.setLightOpacity(255);
         this.setCreativeTab(NorthrendCreativeTabs.tabNorthrend);
     }
