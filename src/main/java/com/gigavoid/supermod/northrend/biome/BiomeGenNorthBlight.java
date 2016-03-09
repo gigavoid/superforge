@@ -14,7 +14,7 @@ public class BiomeGenNorthBlight extends NorthrendBiomeGenBase{
         super(id, weight);
 
         setBiomeName("Northrend Blight");
-        setHeight(new BiomeGenBase.Height(0.63f, .01f));
+        setHeight(new BiomeGenBase.Height(-0.63f, .01f));
         topBlock = BlockNorthBlight.instance.getDefaultState();
         fillerBlock = BlockNorthBlight.instance.getDefaultState();
     }
