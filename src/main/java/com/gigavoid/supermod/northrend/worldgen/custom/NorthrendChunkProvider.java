@@ -190,7 +190,7 @@ public class NorthrendChunkProvider implements IChunkProvider {
                                 }
                                 else if (y * 8 + y1 < this.chunkProviderSettings.seaLevel)
                                 {
-                                    /*BiomeGenBase biomeAtCoords = this.worldObj.getBiomeGenForCoords(new BlockPos(x * 4 + x1, y * 8 + y1, z * 4 + z1));
+                                    /*BiomeGenBase biomeAtCoords = this.worldObj.getBiomeGenForCoords(new BlockPos(x * 4 + x1, 0, z * 4 + z1));
                                     int biomeID = biomeAtCoords.biomeID;
                                     if (biomeID != NorthrendBiomes.northBlight.biomeID) {
                                         p_180518_3_.setBlockState(x * 4 + x1, y * 8 + y1, z * 4 + z1, this.oceanFiller.getDefaultState());

@@ -3,6 +3,7 @@ package com.gigavoid.supermod.northrend.block;
 import com.gigavoid.supermod.northrend.creativetab.NorthrendCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -14,6 +15,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockNorthBlight extends Block {
+    public static final PropertyBool SNOWY = PropertyBool.create("snowy");
     public static BlockNorthBlight instance = new BlockNorthBlight();
 
     private BlockNorthBlight() {
@@ -33,10 +35,8 @@ public class BlockNorthBlight extends Block {
     @Override
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
         super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
-        if (neighborBlock == Blocks.snow_layer){
-            if (worldIn.getBlockState(pos.offset(EnumFacing.UP)).getBlock() == neighborBlock){
-                worldIn.setBlockToAir(pos.offset(EnumFacing.UP));
-            }
+        if (worldIn.getBlockState(pos.offset(EnumFacing.UP)).getBlock() == Blocks.snow_layer) {
+            worldIn.setBlockToAir(pos.offset(EnumFacing.UP));
         }
     }
 }

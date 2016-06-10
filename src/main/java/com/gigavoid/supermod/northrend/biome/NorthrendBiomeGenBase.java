@@ -63,7 +63,7 @@ public class NorthrendBiomeGenBase extends BiomeGenBase {
         int l = (int)(p_180628_6_ / 3.0D + 3.0D + p_180628_2_.nextDouble() * 0.25D);
         int i1 = p_180628_4_ & 15;
         int j1 = p_180628_5_ & 15;
-        int specialBlockHeightLimit = p_180628_2_.nextInt(4) + 62;
+        int specialBlockHeightLimit = p_180628_2_.nextInt(3) + 78;
 
         for (int k1 = 255; k1 >= 0; --k1)
         {

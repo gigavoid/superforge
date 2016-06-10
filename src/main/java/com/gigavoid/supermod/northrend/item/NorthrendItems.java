@@ -2,6 +2,7 @@ package com.gigavoid.supermod.northrend.item;
 
 import com.gigavoid.supermod.common.Register;
 import com.gigavoid.supermod.northrend.creativetab.NorthrendCreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

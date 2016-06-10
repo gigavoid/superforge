@@ -26,7 +26,7 @@ public class NorthrendBiomes {
         northHugeMountains = new BiomeGenNorthHugeMountains(register.getNextBiomeID(), 10); //10
         northHills = new BiomeGenNorthHills(register.getNextBiomeID(), 60); //60
         northBirchForest = new BiomeGenNorthBirchForest(register.getNextBiomeID(), 10); //10
-        northBlight = new BiomeGenNorthBlight(register.getNextBiomeID(), 0);
+        northBlight = new BiomeGenNorthBlight(register.getNextBiomeID(), 30); //5
         northSpikes = new BiomeGenNorthSpikes(register.getNextBiomeID(), 5); //5
 
         BiomeManager.addBiome(BiomeManager.BiomeType.ICY, new BiomeManager.BiomeEntry(northForest, 0));
