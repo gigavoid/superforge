@@ -46,6 +46,9 @@ public class NorthrendRecipies {
         GameRegistry.addRecipe(new ItemStack(NorthrendItems.mithrilHoe)," aa", " b ", " b ", 'a', mithrilIngot, 'b', stick);
     }
 
+    private static void paddedArmor(){
+    }
+
     private static void mithrilIngot(){
         GameRegistry.addSmelting(BlockNorthMithrilOre.instance, new ItemStack(NorthrendItems.mithrilIngot), 1);
     }

@@ -39,6 +39,14 @@ public class Register {
         }
     }
 
+    public void registerItemWithTexture(Item item, String name, String texture, FMLInitializationEvent event) {
+        item.setUnlocalizedName(name);
+        GameRegistry.registerItem(item, name);
+        if(event.getSide() == Side.CLIENT) {
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(texture, "inventory"));
+        }
+    }
+
     public int registerDimension(Class<? extends WorldProvider> provider, boolean keepLoaded){
         DimensionManager.registerProviderType(nextDimensionId, provider, keepLoaded);
         DimensionManager.registerDimension(nextDimensionId, nextDimensionId);
