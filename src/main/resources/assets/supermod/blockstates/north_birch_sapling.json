@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "stage=0,type=birch": { "model": "supermod:north_birch_sapling" },
+    "stage=1,type=birch": { "model": "supermod:north_birch_sapling" }
+  }
+}

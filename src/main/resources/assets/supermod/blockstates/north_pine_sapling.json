@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "stage=0,type=pine": { "model": "supermod:north_pine_sapling" },
+    "stage=1,type=pine": { "model": "supermod:north_pine_sapling" }
+  }
+}

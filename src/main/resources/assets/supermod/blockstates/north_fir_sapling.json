@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "stage=0,type=fir": { "model": "supermod:north_fir_sapling" },
+    "stage=1,type=fir": { "model": "supermod:north_fir_sapling" }
+  }
+}

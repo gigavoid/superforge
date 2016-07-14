@@ -130,13 +130,13 @@ public class NorthrendWorldGenBloodBeech extends WorldGenAbstractTree {
     private void generateBranch(World world, Random random, BlockPos pos){
         Vec3 from = new Vec3(random.nextInt(3) - 1, random.nextInt(2) + 6, random.nextInt(3) - 1);
         Vec3 to = new Vec3(from.xCoord * random.nextInt(3) + 2, from.yCoord + random.nextInt(2) + 1, from.zCoord * random.nextInt(3) + 2);
-        int distance = (int)from.distanceTo(to);
+        int distance = (int)Math.round(from.distanceTo(to));
         Vec3 line = new Vec3(to.xCoord - from.xCoord, to.yCoord - from.yCoord, to.zCoord - from.zCoord);
         line.normalize();
         for (int i = 0; i < distance; i++){
             line.add(line);
             BlockPos logPos = new BlockPos(line);
-            logPos.add(0, 7, 0);
+            //logPos.add(0, 7, 0);
             world.setBlockState(pos.add(logPos), BlockNorthBloodBeechLog.instance.getDefaultState().withProperty(AXIS_PROP, BlockLog.EnumAxis.fromFacingAxis(EnumFacing.Axis.Y)));
         }
     }

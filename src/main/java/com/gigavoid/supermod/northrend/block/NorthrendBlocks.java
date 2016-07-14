@@ -36,9 +36,9 @@ public class NorthrendBlocks {
         register.registerBlock(BlockNorthRedstoneOre.instance_lit, "north_lit_red_stone_ore", "north_red_stone_ore");
         register.registerBlock(BlockNorthDragonBone.instance, "north_dragon_bone");
         register.registerBlock(BlockNorthDragonHead.instance, "north_dragonhead");
-        register.registerBlock(BlockNorthSapling.instance_pine, "north_pine_sapling", "north_sapling");
-        register.registerBlock(BlockNorthSapling.instance_fir, "north_fir_sapling", "north_sapling");
-        register.registerBlock(BlockNorthSapling.instance_birch, "north_birch_sapling", "north_sapling");
+        register.registerBlock(BlockNorthSapling.instance_pine, "north_pine_sapling");
+        register.registerBlock(BlockNorthSapling.instance_fir, "north_fir_sapling");
+        register.registerBlock(BlockNorthSapling.instance_birch, "north_birch_sapling");
         //register.registerBlock(northBloodBeechLog, "north_blood_beech_log");
         //register.registerBlock(northBloodBeechLeaves, "north_blood_beech_leaves");
     }
